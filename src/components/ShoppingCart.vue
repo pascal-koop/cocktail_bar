@@ -1,5 +1,5 @@
 <template>
-  <div v-if="showCart" class="wrapper">
+  <div class="wrapper">
     <div class="cart">
       <div class="cart-header__close">
         <i class="fas fa-times"></i>
@@ -31,6 +31,7 @@
 <script>
 export default {
   //emits: ['incrementAmount', 'decrementAmount', 'deleteItem'],
+  emits: ['update:total-items-count'],
   data() {
     return {
       cartItems: [
@@ -53,11 +54,11 @@ export default {
     };
   },
   computed: {
-    showCart() {
+    showShoppingCard() {
       return this.cartItems.length > 0;
     },
     totalPriceSum(){
-      let totalPrice = 0; 
+      let totalPrice = 0;
       for (const cartItem of this.cartItems) {
        totalPrice += cartItem.amount * cartItem.price;
       }
@@ -68,6 +69,7 @@ export default {
       for (const cartItem of this.cartItems) {
         count += cartItem.amount;
       }
+      this.$emit('update:total-items-count', count)
       return count;
     },
   },
@@ -91,6 +93,9 @@ export default {
       const identifiedCocktail = this.cartItems.find(cocktail => cocktail.id === cocktailId);
       this.cartItems.splice(identifiedCocktail, 1);
     },
+  },
+  mounted() {
+    this.$emit('update:total-items-count', this.totalItemsCount);
   },
 };
 </script>

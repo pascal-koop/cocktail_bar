@@ -1,6 +1,6 @@
 import { createApp } from 'vue';
 import { createPinia } from 'pinia';
-//import './style.css';
+import './css/index.css';
 import App from './App.vue';
 import NavigationBar from './components/Navigation.vue';
 import Footer from './components/Footer.vue';

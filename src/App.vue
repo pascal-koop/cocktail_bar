@@ -1,53 +1,45 @@
 <template>
-  <WelcomeItems />
   <Navigation />
+  <WelcomeItems />
+  <CocktailShop />
+  <ShoppingCardInfo :shopping-card-count="shoppingCardCount" @click="toggleShoppingCard" />
+  <ShoppingCart v-show="showShoppingCard" @update:total-items-count="updateCardCount" />
   <Footer />
-  <ShoppingCart />
 </template>
 
 <script>
 import WelcomeItems from './components/WelcomeItems.vue';
+import ShoppingCart from './components/ShoppingCart.vue';
 //import useCocktailStore from '../stores/cocktaill';
 import Navigation from './components/Navigation.vue';
 import Footer from './components/Footer.vue';
-import ShoppingCart from './components/ShoppingCart.vue';
+import ShoppingCardInfo from './components/ShoppingCardInfo.vue';
 export default {
   components: {
     WelcomeItems,
     Navigation,
+    ShoppingCardInfo,
     Footer,
     ShoppingCart,
   },
   data() {
     return {
-      cocktails: [
-        { id: 'mojito' ,name: 'Mojito', price: 10, amount: 0, image: './src/assets/mojito.png' }
-      ],
+      showShoppingCard: false,
+      shoppingCardCount: 0,
     };
   },
-};
+  methods: {
+    toggleShoppingCard() {
+      this.showShoppingCard = !this.showShoppingCard;
+    },
+    updateCardCount(count) {
+      console.log(count);
+      this.shoppingCardCount = count;
+    },
+  },
+  }
+;
 </script>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,700;1,400;1,700&display=swap');
-:root {
-  font-family: 'Space Mono', monospace;
-}
-body {
-  margin: 5px;
-}
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-h1 {
-  font-size: 3rem;
-  font-weight: 700;
-  font-style: bold;
-  color: rgb(36, 36, 36);
-
-  margin: 1rem 0;
-}
 </style>
