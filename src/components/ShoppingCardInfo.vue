@@ -1,5 +1,6 @@
 <template>
-    <button>Shopping Card - {{ shoppingCardCount }}</button>
+  
+    <v-btn >Shopping Card - {{ shoppingCardCount }}</v-btn>
 </template>
 
 <script>

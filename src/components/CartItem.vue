@@ -8,14 +8,14 @@
       <p>{{ cocktailPrice }} €</p>
     </div>
     <div class="cart-item__amount">
-      <button @click="incrementItemAmount">
-        <i class="fas fa-plus"></i>
-      </button>
+      <v-btn rounded="pill" @click="incrementItemAmount">
+        <i class="fa fa-plus"></i>
+      </v-btn>
       <h6>Menge:</h6>
       <p>{{ amount }}</p>
-      <button @click="decrementItemAmount">
-        <i class="fas fa-minus"> </i>
-      </button>
+      <v-btn rounded="pill" @click="decrementItemAmount">
+        <i class="fa fa-minus"> </i>
+      </v-btn>
       <h6 @click="deleteItem">entfernen</h6>
     </div>
   </div>
@@ -27,14 +27,14 @@ export default {
   props: ['cocktailPrice', 'cocktailName', 'image', 'amount', 'id'],
   methods: {
     incrementItemAmount() {
-      this.$emit('increment-item', this.id)
+      this.$emit('increment-item', this.id);
     },
-    decrementItemAmount(){
-      this.$emit('decrement-item', this.id)
+    decrementItemAmount() {
+      this.$emit('decrement-item', this.id);
     },
     deleteItem() {
-      this.$emit('delete-item', this.id)
-    }
-  }
+      this.$emit('delete-item', this.id);
+    },
+  },
 };
 </script>
