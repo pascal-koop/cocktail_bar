@@ -3,8 +3,8 @@
     <div class="footer">
     <div class="footer-txt">
       <p>© 2021 Cocktail Bar</p>
-      <p><a href="./Agb.vue">AGB</a></p>
-      <p><a href="./Impressum.vue">Impressum</a></p>
+      <p><a href="#">AGB</a></p>
+      <p><a href="#">Impressum</a></p>
     </div>
       <div class="footer__social">
         <ul>
