@@ -2,9 +2,7 @@ import { createApp } from 'vue';
 import { createPinia } from 'pinia';
 import './css/index.css';
 import App from './App.vue';
-import NavigationBar from './components/Navigation.vue';
-import Footer from './components/Footer.vue';
-import ShoppingCart from './components/ShoppingCart.vue';
+
 import CartItem from './components/CartItem.vue';
 
 const app = createApp(App);

@@ -1,25 +1,24 @@
 <template>
-  <Navigation />
-  <WelcomeItems />
-  <CocktailShop />
+  <NavigationBar />
+  <HeroItems />
   <ShoppingCardInfo :shopping-card-count="shoppingCardCount" @click="toggleShoppingCard" />
   <ShoppingCart v-show="showShoppingCard" @update:total-items-count="updateCardCount" />
-  <Footer />
+  <FooterBar />
 </template>
 
 <script>
-import WelcomeItems from './components/WelcomeItems.vue';
+import HeroItems from './components/HeroItems.vue';
 import ShoppingCart from './components/ShoppingCart.vue';
 //import useCocktailStore from '../stores/cocktaill';
-import Navigation from './components/Navigation.vue';
-import Footer from './components/Footer.vue';
+import NavigationBar from './components/NavigationBar.vue';
+import FooterBar from './components/FooterBar.vue';
 import ShoppingCardInfo from './components/ShoppingCardInfo.vue';
 export default {
   components: {
-    WelcomeItems,
-    Navigation,
+    HeroItems,
+    NavigationBar,
     ShoppingCardInfo,
-    Footer,
+    FooterBar,
     ShoppingCart,
   },
   data() {

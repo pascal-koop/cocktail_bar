@@ -1,9 +1,6 @@
 <template>
   <div class="wrapper">
     <div class="cart">
-      <div class="cart-header__close">
-        <i class="fas fa-times"></i>
-      </div>
       <div class="cart-header">
         <h3>Shopping Cart</h3>
         <p>You have {{ totalItemsCount }} items in your cart</p>
@@ -30,7 +27,6 @@
 
 <script>
 export default {
-  //emits: ['incrementAmount', 'decrementAmount', 'deleteItem'],
   emits: ['update:total-items-count'],
   data() {
     return {
@@ -54,9 +50,9 @@ export default {
     };
   },
   computed: {
-    showShoppingCard() {
-      return this.cartItems.length > 0;
-    },
+    //showShoppingCard() {
+      //return this.cartItems.length > 0;
+   // },
     totalPriceSum(){
       let totalPrice = 0;
       for (const cartItem of this.cartItems) {
