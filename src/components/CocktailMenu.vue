@@ -1,20 +1,16 @@
 <template>
   <v-card>
     <v-tabs
-      bg-color="teal-darken-3"
+      bg-color="indigo-darken-1"
       show-arrows
       center-active
-      slider-color="teal-lighten-3"
+      slider-color="lime-accent-1"
       next-icon="fa-solid fa-chevron-right"
       prev-icon="fa-solid fa-chevron-left"
       align-tabs="center"
     >
-      <v-tab
-        v-for="i in 30"
-        :key="i"
-        :value="'tab-' + i"
-      >
-        Item {{ i }}
+      <v-tab v-for="index in categories" :key="index" :value="index">
+        {{ index }}
       </v-tab>
     </v-tabs>
   </v-card>
@@ -22,7 +18,21 @@
 
 <script>
 export default {
-  
+  data() {
+    return {
+      categories: [
+        'Fruity',
+        'Sweet',
+        'Sour',
+        'Bitter',
+        'Beer',
+        'Softdrinks',
+        'Longdrinks',
+        'Wine/Prosseco',
+      ],
+      
+    };
+  },
 };
 </script>
 

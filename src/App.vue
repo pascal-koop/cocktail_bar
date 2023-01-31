@@ -1,9 +1,12 @@
 <template>
   <RouterView name="NavigationBar"></RouterView>
-  <RouterView name="default"></RouterView>
-  <!-- <RouterView class="view cocktail-order"></RouterView> -->
+  <RouterView name="default" v-slot="{ Component }">
+    <transition name="route" mode="out-in" appear>
+      <component :is="Component" />
+    </transition>
+  </RouterView>
   <ShoppingCardInfo :shopping-card-count="shoppingCardCount" @click="toggleShoppingCard" />
-  <ShoppingCart v-show="showShoppingCard" @update:total-items-count="updateCardCount" /> 
+  <ShoppingCart v-show="showShoppingCard" @update:total-items-count="updateCardCount" />
   <RouterView name="FooterBar"></RouterView>
 </template>
 
@@ -38,4 +41,17 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.route-enter-from {
+  opacity: 0;
+  transform: translateX(-100px);
+}
+.route-enter-active,
+.route-leave-active {
+  transition: all 0.2s ease-out;
+}
+.route-leave-to {
+  opacity: 0;
+  transform: translateX(100px);
+}
+</style>

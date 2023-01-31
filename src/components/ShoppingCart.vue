@@ -31,13 +31,14 @@ export default {
   data() {
     return {
       cartItems: [
-        { id: 'mojito', name: 'Mojito', price: 10, amount: 1, image: './src/assets/mojito.png' },
+        { id: 'mojito', name: 'Mojito', price: 10, amount: 1, image: './src/assets/mojito.png', category: 'Sour' },
         {
           id: 'margarita',
           name: 'Margarita',
           price: 12,
           amount: 1,
           image: './src/assets/margarita.png',
+          category: 'Sweet',
         },
         {
           id: 'long-island-iced-tea',
@@ -45,6 +46,7 @@ export default {
           price: 15,
           amount: 1,
           image: './src/assets/long_island.png',
+          category: 'Fruitys'
         },
       ],
     };
