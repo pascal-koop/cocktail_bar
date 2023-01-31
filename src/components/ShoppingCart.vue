@@ -51,21 +51,21 @@ export default {
   },
   computed: {
     //showShoppingCard() {
-      //return this.cartItems.length > 0;
-   // },
-    totalPriceSum(){
+    //return this.cartItems.length > 0;
+    // },
+    totalPriceSum() {
       let totalPrice = 0;
       for (const cartItem of this.cartItems) {
-       totalPrice += cartItem.amount * cartItem.price;
+        totalPrice += cartItem.amount * cartItem.price;
       }
-      return totalPrice
+      return totalPrice;
     },
     totalItemsCount() {
       let count = 0;
       for (const cartItem of this.cartItems) {
         count += cartItem.amount;
       }
-      this.$emit('update:total-items-count', count)
+      this.$emit('update:total-items-count', count);
       return count;
     },
   },

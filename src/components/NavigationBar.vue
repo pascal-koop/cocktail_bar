@@ -1,9 +1,11 @@
 <template>
   <nav>
-    <h6><a href="#">Logo</a> </h6>
     <ul>
-      <li v-for="(item, index) in navItems" :key="index">
-        <a :href="item.route">{{item.name}}</a>
+      <li>
+      <router-link to="/">Home</router-link>
+      </li>
+      <li>
+      <router-link to="/cocktails">Cocktails</router-link>
       </li>
     </ul>
   </nav>
@@ -13,11 +15,7 @@
 export default {
   data() {
     return {
-      navItems: [
-        { name: "Cocktails", route: "#" },
-        { name: "About", route: "#" },
-        { name: "Contact", route: "#" },
-      ],
+      
     };
   },
 

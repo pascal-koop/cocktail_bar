@@ -1,30 +1,24 @@
 <template>
-  <router-view class="view home"></router-view>
-  <!-- <HeroItems /> -->
-  <!-- <ShoppingCardInfo :shopping-card-count="shoppingCardCount" @click="toggleShoppingCard" /> -->
-  <!-- <ShoppingCart v-show="showShoppingCard" @update:total-items-count="updateCardCount" /> -->
-  <CocktailMenu />
-  <!-- <FooterBar /> -->
-  
+  <RouterView name="NavigationBar"></RouterView>
+  <RouterView name="default"></RouterView>
+  <!-- <RouterView class="view cocktail-order"></RouterView> -->
+  <ShoppingCardInfo :shopping-card-count="shoppingCardCount" @click="toggleShoppingCard" />
+  <ShoppingCart v-show="showShoppingCard" @update:total-items-count="updateCardCount" /> 
+  <RouterView name="FooterBar"></RouterView>
 </template>
 
 <script>
-//import HeroItems from './components/HeroItems.vue';
-//import ShoppingCart from './components/ShoppingCart.vue';
-//import useCocktailStore from '../stores/cocktaill';
-//import NavigationBar from './components/NavigationBar.vue';
-//import FooterBar from './components/FooterBar.vue';
-//import ShoppingCardInfo from './components/ShoppingCardInfo.vue';
-import CocktailMenu from './components/CocktailMenu.vue'
+import ShoppingCart from './components/ShoppingCart.vue';
+import NavigationBar from './components/NavigationBar.vue';
+import FooterBar from './components/FooterBar.vue';
+import ShoppingCardInfo from './components/ShoppingCardInfo.vue';
 
 export default {
   components: {
-    // HeroItems,
-    //NavigationBar,
-    // ShoppingCardInfo,
-    // FooterBar,
-    // ShoppingCart,
-    CocktailMenu
+    NavigationBar,
+    ShoppingCardInfo,
+    FooterBar,
+    ShoppingCart,
   },
   data() {
     return {
@@ -41,9 +35,7 @@ export default {
       this.shoppingCardCount = count;
     },
   },
-  }
-;
+};
 </script>
 
-<style>
-</style>
+<style></style>
