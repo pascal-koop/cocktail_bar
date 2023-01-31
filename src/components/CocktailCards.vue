@@ -1,6 +1,6 @@
 <template>
   
-    <v-card elevation="5" width="200">
+    <v-card elevation="8" width="200" class="ma-5 flex-md-grow-1">
       <v-img :src="imgUrl" ></v-img>
       <v-card-item>
         <v-card-title>

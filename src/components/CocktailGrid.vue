@@ -1,23 +1,14 @@
 <template>
-  <v-container class="bg-surface-variant">
-    <v-row no-gutters class="ma-0">
-      <v-col >
-        
-        <v-sheet class="pa-2 ma-2" v-for="(cocktail, _index) in cocktails" >
-        
-          <CocktailCards
-            
-            :key="cocktail.id"
-            :cocktail-name="cocktail.name"
-            :cocktail-price="cocktail.price"
-            :img-url="cocktail.image"
-          ></CocktailCards>
-        </v-sheet>
-      </v-col>
-      <v-responsive width="100%"></v-responsive>
-      
-    </v-row>
-  </v-container>
+  <div class="d-flex flex-wrap justify-center ">
+    <v-sheet v-for="(cocktail, _index) in cocktails">
+      <CocktailCards
+        :key="cocktail.id"
+        :cocktail-name="cocktail.name"
+        :cocktail-price="cocktail.price"
+        :img-url="cocktail.image"
+      ></CocktailCards>
+    </v-sheet>
+  </div>
 </template>
 
 <script>
