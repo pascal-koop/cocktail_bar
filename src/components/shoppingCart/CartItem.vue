@@ -21,20 +21,18 @@
   </div>
 </template>
 
-<script>
-export default {
-  emits: ['increment-item', 'decrement-item', 'delete-item'],
-  props: ['cocktailPrice', 'cocktailName', 'image', 'amount', 'id'],
-  methods: {
-    incrementItemAmount() {
-      this.$emit('increment-item', this.id);
-    },
-    decrementItemAmount() {
-      this.$emit('decrement-item', this.id);
-    },
-    deleteItem() {
-      this.$emit('delete-item', this.id);
-    },
-  },
-};
+<script setup>
+import {} from 'vue';
+const emit = defineEmits(['increment-item', 'decrement-item', 'delete-item']);
+const props = defineProps(['cocktailPrice', 'cocktailName', 'image', 'amount', 'id']);
+
+function incrementItemAmount() {
+  emit('increment-item', props.id);
+}
+function decrementItemAmount() {
+  emit('decrement-item', props.id);
+}
+function deleteItem() {
+  emit('delete-item', props.id);
+}
 </script>
