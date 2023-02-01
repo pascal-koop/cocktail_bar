@@ -5,37 +5,36 @@
       <component :is="Component" />
     </transition>
   </RouterView>
-  <ShoppingCardInfo :shopping-card-count="shoppingCardCount" @click="toggleShoppingCard" />
-  <ShoppingCart v-show="showShoppingCard" @update:total-items-count="updateCardCount" />
+  <ShoppingCartInfo :shopping-card-count="shoppingCartCount" @click="toggleShoppingCart" />
+  <ShoppingCart v-show="showShoppingCart" @update:total-items-count="updateCartCount" />
   <RouterView name="FooterBar"></RouterView>
 </template>
 
 <script>
-import ShoppingCart from './components/ShoppingCart.vue';
+import ShoppingCart from './components/shoppingCart/ShoppingCart.vue';
 import NavigationBar from './components/NavigationBar.vue';
 import FooterBar from './components/FooterBar.vue';
-import ShoppingCardInfo from './components/ShoppingCardInfo.vue';
+import ShoppingCartInfo from './components/shoppingCart/ShoppingCartInfo.vue';
 
 export default {
   components: {
     NavigationBar,
-    ShoppingCardInfo,
-    FooterBar,
+    ShoppingCartInfo,
     ShoppingCart,
+    
   },
   data() {
     return {
-      showShoppingCard: false,
-      shoppingCardCount: 0,
+      showShoppingCart: false,
+      shoppingCartCount: 0,
     };
   },
   methods: {
-    toggleShoppingCard() {
-      this.showShoppingCard = !this.showShoppingCard;
+    toggleShoppingCart() {
+      this.showShoppingCart = !this.showShoppingCart;
     },
-    updateCardCount(count) {
-      console.log(count);
-      this.shoppingCardCount = count;
+    updateCartCount(count) {
+      this.shoppingCartCount = count;
     },
   },
 };

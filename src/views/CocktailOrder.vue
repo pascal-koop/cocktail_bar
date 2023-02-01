@@ -7,8 +7,8 @@
 </template>
 
 <script>
-import CocktailMenu from '../components/CocktailMenu.vue';
-import CocktailGrid from '../components/CocktailGrid.vue';
+import CocktailMenu from '../components/cocktailMenu/CocktailMenu.vue';
+import CocktailGrid from '../components/cocktailMenu/CocktailGrid.vue';
 
 export default {
   components: {
@@ -17,3 +17,11 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.cocktails-wrapper {
+  max-width: 90vw;
+  margin: 0 auto;
+
+}
+</style>
