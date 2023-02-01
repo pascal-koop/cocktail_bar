@@ -22,12 +22,9 @@
 </template>
 
 <script>
-
-import { mapState} from 'pinia';
-import { useCartStore } from '../../stores/CartStore.js';
 export default {
   emits: ['increment-item', 'decrement-item', 'delete-item'],
-  //props: ['cocktailPrice', 'cocktailName', 'image', 'amount', 'id'],
+  props: ['cocktailPrice', 'cocktailName', 'image', 'amount', 'id'],
   methods: {
     incrementItemAmount() {
       this.$emit('increment-item', this.id);
@@ -38,12 +35,6 @@ export default {
     deleteItem() {
       this.$emit('delete-item', this.id);
     },
-  },
-  computed: {
-    ...mapState(useCartStore, {
-      cocktailName: state => state.cocktailName,
-    }),
-    
   },
 };
 </script>

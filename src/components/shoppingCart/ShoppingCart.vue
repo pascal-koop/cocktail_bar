@@ -7,6 +7,13 @@
       </div>
       <div class="cart-item-list">
         <cart-item
+          v-for="cocktail in cartItems"
+          :key="cocktail.name"
+          :id="cocktail.id"
+          :cocktail-name="cocktail.name"
+          :cocktail-price="cocktail.price"
+          :amount="cocktail.amount"
+          :image="cocktail.image"
           @increment-item="incrementAmount"
           @decrement-item="decrementAmount"
           @delete-item="deleteItem"
@@ -19,13 +26,35 @@
 </template>
 
 <script>
-
+import { mapStores, mapWritableState} from 'pinia';
+import { useCocktailStore } from '../../stores/CocktailStore.js';
 export default {
   emits: ['update:total-items-count'],
   data() {
-    return {};
+    return {
+      cartItems: [
+        { id: 'mojito', name: 'Mojito', price: 10, amount: 1, image: './src/assets/mojito.png', category: 'Sour' },
+        {
+          id: 'margarita',
+          name: 'Margarita',
+          price: 12,
+          amount: 1,
+          image: './src/assets/margarita.png',
+          category: 'Sweet',
+        },
+        {
+          id: 'long-island-iced-tea',
+          name: 'Long Island Iced Tea',
+          price: 15,
+          amount: 1,
+          image: './src/assets/long_island.png',
+          category: 'Fruitys'
+        },
+      ],
+    };
   },
   computed: {
+     
     //showShoppingCard() {
     //return this.cartItems.length > 0;
     // },
