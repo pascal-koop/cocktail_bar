@@ -5,6 +5,7 @@ export const useCocktailStore = defineStore('cocktailStore', {
     return {
       cocktailMenu: [
         {
+          id: 1,
           name: 'Mojito',
           price: 10,
           amount: 1,
@@ -12,6 +13,7 @@ export const useCocktailStore = defineStore('cocktailStore', {
           category: 'Sour',
         },
         {
+          id: 2,
           name: 'Margarita',
           price: 10,
           amount: 1,
@@ -19,6 +21,7 @@ export const useCocktailStore = defineStore('cocktailStore', {
           category: 'Bitter',
         },
         {
+          id: 3,
           name: 'Long Island Iced Tea',
           price: 10,
           amount: 1,
@@ -26,6 +29,7 @@ export const useCocktailStore = defineStore('cocktailStore', {
           category: 'Sour',
         },
         {
+          id: 4,
           name: 'Mai Tai',
           price: 10,
           amount: 1,
@@ -33,6 +37,7 @@ export const useCocktailStore = defineStore('cocktailStore', {
           category: 'Fruity',
         },
         {
+          id: 5,
           name: 'Mint Julep',
           price: 10,
           amount: 1,
@@ -40,6 +45,7 @@ export const useCocktailStore = defineStore('cocktailStore', {
           category: 'Sweet',
         },
         {
+          id: 6,
           name: 'Mojito',
           price: 10,
           amount: 1,
@@ -47,6 +53,7 @@ export const useCocktailStore = defineStore('cocktailStore', {
           category: 'Sour',
         },
         {
+          id: 7,
           name: 'Margarita',
           price: 10,
           amount: 1,
@@ -54,6 +61,7 @@ export const useCocktailStore = defineStore('cocktailStore', {
           category: 'Bitter',
         },
         {
+          id: 8,
           name: 'Long Island Iced Tea',
           price: 10,
           amount: 1,
@@ -61,6 +69,7 @@ export const useCocktailStore = defineStore('cocktailStore', {
           category: 'Sour',
         },
         {
+          id: 9,
           name: 'Mai Tai',
           price: 10,
           amount: 1,
@@ -69,8 +78,9 @@ export const useCocktailStore = defineStore('cocktailStore', {
         },
       ],
       beerMenu: [
-        { name: 'Becks', price: 3.5, amount: 1, imageUrl: '../assets/becks.png', category: 'Beer' },
+        { id: 25, name: 'Becks', price: 3.5, amount: 1, imageUrl: '../assets/becks.png', category: 'Beer' },
         {
+          id: 26,
           name: 'Budweiser',
           price: 3.5,
           amount: 1,
@@ -78,6 +88,7 @@ export const useCocktailStore = defineStore('cocktailStore', {
           category: 'Beer',
         },
         {
+          id: 27,
           name: 'Corona',
           price: 3.5,
           amount: 1,
@@ -85,6 +96,7 @@ export const useCocktailStore = defineStore('cocktailStore', {
           category: 'Beer',
         },
         {
+          id: 28,
           name: 'Heineken',
           price: 3.5,
           amount: 1,
@@ -92,6 +104,7 @@ export const useCocktailStore = defineStore('cocktailStore', {
           category: 'Beer',
         },
         {
+          id: 29,
           name: 'Peroni',
           price: 3.5,
           amount: 1,
@@ -101,6 +114,7 @@ export const useCocktailStore = defineStore('cocktailStore', {
       ],
       prosecMenu: [
         {
+          id: 30,
           name: 'Ray&Scavi',
           price: 6,
           amount: 1,
