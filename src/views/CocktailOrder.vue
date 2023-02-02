@@ -1,21 +1,16 @@
 <template>
   <div class="cocktails-wrapper">
     <h1>Cocktails</h1>
-    <CocktailMenu />
+    <CocktailMenuNav />
     <CocktailGrid />
   </div>
 </template>
 
-<script>
-import CocktailMenu from '../components/cocktailMenu/CocktailMenu.vue';
+<script setup>
 import CocktailGrid from '../components/cocktailMenu/CocktailGrid.vue';
+import CocktailMenuNav from '../components/cocktailMenu/CocktailMenuNav.vue';
 
-export default {
-  components: {
-    CocktailMenu,
-    CocktailGrid
-  },
-};
+
 </script>
 
 <style scoped>

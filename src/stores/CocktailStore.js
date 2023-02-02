@@ -3,7 +3,10 @@ import { defineStore } from 'pinia';
 export const useCocktailStore = defineStore('cocktailStore', {
   state: () => {
     return {
-      cocktailMenu: [
+      categorys: ['All', 'Sour', 'Bitter', 'Fruity', 'Sweet', 'Beer', 'Prosecco'],
+      selectedCategory: 'All',
+      
+      cocktailsMenu: [
         {
           id: 1,
           name: 'Mojito',
@@ -76,9 +79,14 @@ export const useCocktailStore = defineStore('cocktailStore', {
           imageUrl: '../assets/mai-tai.png',
           category: 'Fruity',
         },
-      ],
-      beerMenu: [
-        { id: 25, name: 'Becks', price: 3.5, amount: 1, imageUrl: '../assets/becks.png', category: 'Beer' },
+        {
+          id: 25,
+          name: 'Becks',
+          price: 3.5,
+          amount: 1,
+          imageUrl: '../assets/becks.png',
+          category: 'Beer',
+        },
         {
           id: 26,
           name: 'Budweiser',
@@ -111,8 +119,6 @@ export const useCocktailStore = defineStore('cocktailStore', {
           imageUrl: '../assets/peroni.png',
           category: 'Beer',
         },
-      ],
-      prosecMenu: [
         {
           id: 30,
           name: 'Ray&Scavi',
@@ -124,11 +130,24 @@ export const useCocktailStore = defineStore('cocktailStore', {
       ],
     };
   },
+  getters: {
+    getSelectedCategory: state => {
+      console.log(state.selectedCategory);
+      return state.selectedCategory;
+    },
+    getCocktailsForSelectedCategory: state => {
+      if (state.selectedCategory === 'All') {
+        return state.cocktailsMenu;
+      }
+      return state.cocktailsMenu.filter(cocktail => cocktail.category === state.selectedCategory);
+    },
+  },
+  actions: {
+    setSelectedCategory(category){
+      this.selectedCategory = category; 
+    }
+  }
 });
-
-
-
-
 
 //   action: {
 //     async fetchCocktails() {

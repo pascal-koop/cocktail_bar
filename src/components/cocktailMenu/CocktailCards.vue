@@ -22,10 +22,9 @@
  
 </template>
 
-<script>
-export default {
-  props: ['cocktailName', 'cocktailPrice', 'imgUrl']
-};
+<script setup>
+  const props = defineProps([ 'cocktailName', 'cocktailPrice', 'imgUrl'])
+  
 </script>
 
 <style scoped>

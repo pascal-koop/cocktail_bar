@@ -7,7 +7,7 @@
       </div>
       <div class="cart-item-list">
         <cart-item
-          v-for="cocktail in cartItems"
+          v-for="cocktail in cartStore.cartItem"
           :key="cocktail.name"
           :id="cocktail.id"
           :cocktail-name="cocktail.name"
@@ -25,78 +25,55 @@
   </div>
 </template>
 
-<script>
-import { mapStores, mapWritableState} from 'pinia';
-import { useCocktailStore } from '../../stores/CocktailStore.js';
-export default {
-  emits: ['update:total-items-count'],
-  data() {
-    return {
-      cartItems: [
-        { id: 'mojito', name: 'Mojito', price: 10, amount: 1, image: './src/assets/mojito.png', category: 'Sour' },
-        {
-          id: 'margarita',
-          name: 'Margarita',
-          price: 12,
-          amount: 1,
-          image: './src/assets/margarita.png',
-          category: 'Sweet',
-        },
-        {
-          id: 'long-island-iced-tea',
-          name: 'Long Island Iced Tea',
-          price: 15,
-          amount: 1,
-          image: './src/assets/long_island.png',
-          category: 'Fruitys'
-        },
-      ],
-    };
-  },
-  computed: {
-     
-    //showShoppingCard() {
-    //return this.cartItems.length > 0;
-    // },
-    totalPriceSum() {
-      let totalPrice = 0;
-      for (const cartItem of this.cartItems) {
-        totalPrice += cartItem.amount * cartItem.price;
-      }
-      return totalPrice;
-    },
-    totalItemsCount() {
-      let count = 0;
-      for (const cartItem of this.cartItems) {
-        count += cartItem.amount;
-      }
-      this.$emit('update:total-items-count', count);
-      return count;
-    },
-  },
-  methods: {
-    incrementAmount(cocktailId) {
-      const identifiedCocktail = this.cartItems.find(cocktail => cocktail.id === cocktailId);
-      identifiedCocktail.amount += 1;
-    },
-    decrementAmount(cocktailId) {
-      const identifiedCocktail = this.cartItems.find(cocktail => cocktail.id === cocktailId);
-      const identifiedCocktailIndex = this.cartItems.findIndex(
-        cocktail => cocktail.id === cocktailId
-      );
-      identifiedCocktail.amount -= 1;
-      if (identifiedCocktail.amount === 0) {
-        this.cartItems.splice(identifiedCocktailIndex, 1);
-      }
-    },
+<script setup>
+  import {  onMounted, computed } from 'vue';
+  import {useCartStore} from '../../stores/cartStore';
 
-    deleteItem(cocktailId) {
-      const identifiedCocktail = this.cartItems.find(cocktail => cocktail.id === cocktailId);
-      this.cartItems.splice(identifiedCocktail, 1);
-    },
-  },
-  mounted() {
-    this.$emit('update:total-items-count', this.totalItemsCount);
-  },
-};
+  const cartStore = useCartStore();
+  const emit = defineEmits(['update:total-items-count']);
+
+  onMounted(() => {
+    emit('update:total-items-count', totalItemsCount);
+  });
+
+  const totalPriceSum = computed(() => {
+    let totalPrice = 0;
+    for (const cartItem of cartStore.cartItem) {
+      totalPrice += cartItem.amount * cartItem.price;
+    }
+    return totalPrice;
+  });
+
+  const totalItemsCount = computed(() => {
+    let count = 0;
+    for (const cartItem of cartStore.cartItem) {
+      count += cartItem.amount;
+    }
+    emit('update:total-items-count', count);
+    return count;
+  });
+
+
+  function incrementAmount(cocktailId) {
+      const identifiedCocktail = cartStore.cartItem.find(cocktail => cocktail.id === cocktailId);
+      identifiedCocktail.amount += 1;
+  };
+
+  function decrementAmount(cocktailId) {
+    const identifiedCocktail = cartStore.cartItem.find(cocktail => cocktail.id === cocktailId);
+    const identifiedCocktailIndex = cartStore.cartItem.findIndex(
+      cocktail => cocktail.id === cocktailId
+    );
+    identifiedCocktail.amount -= 1;
+    if (identifiedCocktail.amount === 0) {
+      cartStore.cartItem.splice(identifiedCocktailIndex, 1);
+    }
+  };
+
+  function deleteItem(cocktailId) {
+    const identifiedCocktail = cartStore.cartItem.find(cocktail => cocktail.id === cocktailId);
+    cartStore.cartItem.splice(identifiedCocktail, 1);
+  }
+
+  
 </script>

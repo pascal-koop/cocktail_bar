@@ -22,7 +22,7 @@
 </template>
 
 <script setup>
-import {} from 'vue';
+
 const emit = defineEmits(['increment-item', 'decrement-item', 'delete-item']);
 const props = defineProps(['cocktailPrice', 'cocktailName', 'image', 'amount', 'id']);
 

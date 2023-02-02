@@ -1,20 +1,10 @@
 <template>
-  
-    <v-btn >Shopping Card - {{ shoppingCardCount }}</v-btn>
+  <v-btn>Shopping Card - {{ cartStore.totalItemsCount }}</v-btn>
 </template>
 
-<script>
-export default {
-  props: {
-    shoppingCardCount: Number
-  },
-  data() {
-    return {}
-  },
-  }
-
+<script setup>
+import { useCartStore } from '../../stores/cartStore';
+const cartStore = useCartStore();
 </script>
 
-<style>
-
-</style>
+<style></style>

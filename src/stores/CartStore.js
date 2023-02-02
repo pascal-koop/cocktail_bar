@@ -12,14 +12,24 @@ export const useCartStore = defineStore('cartStore', {
           imageUrl: '../assets/mojito.png',
           category: 'Sour',
         },
-        
+        {
+          id: 2,
+          name: 'Pina Colada',
+          price: 12,
+          amount: 1,
+          imageUrl: '../assets/mojito.png',
+          category: 'Fruity',
+        },
       ],
-      name: 'Pascale',
     };
   },
-  actions: {
-    incrementAmount(id) {
-      this.cartItem.find((item) => item.id === id).amount++;
-    }
-  }
+  getters: {
+    totalItemsCount: state => {
+      let total = 0;
+      for (const cocktail of state.cartItem) {
+        total += cocktail.amount;
+      }
+      return total;
+    },
+  },
 });
