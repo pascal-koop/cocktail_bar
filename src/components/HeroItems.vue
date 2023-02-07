@@ -2,7 +2,7 @@
   <div class="welcome">
     <img
       loading="lazy"
-      src="src/assets/hero_banner_horizontal.png"
+      src="../assets/hero_banner_horizontal.png"
       alt="A photograph of a red neon sign that says bar in big letters"
     />
     <h1>Cocktail Bar</h1>

@@ -13,7 +13,7 @@
           :cocktail-name="cocktail.name"
           :cocktail-price="cocktail.price"
           :amount="cocktail.amount"
-          :image="cocktail.image"
+          :cart-Image="cocktail.cartImage"
           @increment-item="incrementAmount"
           @decrement-item="decrementAmount"
           @delete-item="deleteItem"

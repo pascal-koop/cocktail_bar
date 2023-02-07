@@ -1,7 +1,7 @@
 <template>
   <div class="cart-item">
     <div class="cart-item__img">
-      <img :src="image" alt="item picture" />
+      <img :src="cartImage" alt="item picture" />
     </div>
     <div class="cart-item__info">
       <h4>{{ cocktailName }}</h4>
@@ -24,7 +24,7 @@
 <script setup>
 
 const emit = defineEmits(['increment-item', 'decrement-item', 'delete-item']);
-const props = defineProps(['cocktailPrice', 'cocktailName', 'image', 'amount', 'id']);
+const props = defineProps(['cocktailPrice', 'cocktailName', 'cartImage', 'amount', 'id']);
 
 function incrementItemAmount() {
   emit('increment-item', props.id);
