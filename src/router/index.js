@@ -8,7 +8,7 @@ const routes = [
     name: 'Home',
     components: {
       default: () => import('../views/Home.vue'),
-      NavigationBar: () => import('../components/NavigationBar.vue'),
+      BottomNavigationBar: () => import('../components/BottomNavigationBar.vue'),
       FooterBar: () => import('../components/FooterBar.vue'),
     },
   },
@@ -17,7 +17,16 @@ const routes = [
     name: 'CocktailOrder',
     components: {
       default: () => import('../views/CocktailOrder.vue'),
-      NavigationBar: () => import('../components/NavigationBar.vue'),
+      BottomNavigationBar: () => import('../components/BottomNavigationBar.vue'),
+      FooterBar: () => import('../components/FooterBar.vue'),
+    },
+  },
+  {
+    path: '/checkout',
+    name: 'Checkout',
+    components: {
+      default: () => import('../views/CartCheckout.vue'),
+      BottomNavigationBar: () => import('../components/BottomNavigationBar.vue'),
       FooterBar: () => import('../components/FooterBar.vue'),
     },
   },

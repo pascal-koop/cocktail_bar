@@ -1,20 +1,33 @@
-<template>
-  <footer>
-    <div class="footer">
-    <div class="footer-txt">
-      <p>© 2021 Cocktail Bar</p>
-      <p><a href="#">AGB</a></p>
-      <p><a href="#">Impressum</a></p>
-    </div>
-      <div class="footer__social">
-        <ul>
-          <li><a href="#">Facebook</a></li>
-          <li><a href="#">Twitter</a></li>
-          <li><a href="#">Instagram</a></li>
-        </ul>
-      </div>
-    </div>
-  </footer>
-</template>
 
-<script></script>
+<template>
+  <v-layout class="w-auto">
+  <v-footer light color="secondary"  class="bg-grey-lighten-1 w-auto ">
+    <v-row justify="center" no-gutters>
+      <v-btn
+        v-for="link in links"
+        :key="link"
+        color="white"
+        variant="text"
+        class="mx-2 "
+        rounded="xl"
+      >
+        {{ link }}
+      </v-btn>
+      <v-col class="text-center mt-4" cols="12">
+        {{ new Date().getFullYear() }} — <strong>Cocktail Bar©</strong>
+      </v-col>
+    </v-row>
+  </v-footer>
+</v-layout>
+</template>
+<script setup>
+const links = [
+  'AGB',
+  'Impressum',
+  'Facebook',
+  'Instagramm',
+  'Twitter'
+]
+
+</script>
+

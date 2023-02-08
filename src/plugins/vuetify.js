@@ -14,7 +14,7 @@ const customDarkTheme = {
     error: '#f44336',
     info: '#2196F3',
     success: '#4caf50',
-    warning: '#fb8c00',
+    warning: '#F50057',
   },
 };
 
@@ -26,6 +26,7 @@ const customLightTheme = {
     primary: "#3f51b5",
     secondary: "E57373",
     error: "#ffcc00",
+    warning: '#F50057'
   },
 };
 export default createVuetify({

@@ -4,7 +4,7 @@
     v-model="dialog"
     activator="parent"
     scroll-strategy="block"
-    transition="dialog-bottom-transition"
+    transition="slide-x-transition"
   >
     <v-card>
       <v-toolbar dark color="secondary">

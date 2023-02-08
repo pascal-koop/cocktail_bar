@@ -1,6 +1,6 @@
 <template>
-  <div class="wrapper">
-    <div class="cart">
+  <div class="wrapper ">
+    <div class="cart float-md-right">
       <div class="cart-header">
         <h3>Shopping Cart</h3>
         <p>You have {{ totalItemsCount }} items in your cart</p>

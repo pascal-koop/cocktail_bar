@@ -3,6 +3,7 @@
     <h1>Cocktails</h1>
     <CocktailMenuNav />
     <CocktailGrid />
+   
   </div>
 </template>
 

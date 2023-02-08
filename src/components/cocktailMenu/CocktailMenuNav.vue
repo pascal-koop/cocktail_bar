@@ -1,5 +1,5 @@
 <template>
-  <v-card>
+  <v-card elevation="5">
     <v-tabs
       show-arrows
       center-active

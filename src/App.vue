@@ -1,23 +1,19 @@
 <template>
-  
-  
-    <RouterView name="NavigationBar"></RouterView>
+  <v-app>
     <RouterView name="default" v-slot="{ Component }">
       <transition name="route" mode="out-in" appear>
         <component :is="Component" />
       </transition>
     </RouterView>
-   <ShoppingCartModal />
-    
-    <RouterView name="FooterBar"></RouterView>
-    <DarkLightMode />
 
+    <DarkLightMode />
+    <RouterView name="FooterBar"></RouterView>
+    <RouterView name="BottomNavigationBar"></RouterView>
+  </v-app>
 </template>
 
 <script setup>
-import DarkLightMode from './components/LightDarkSwitcher.vue'
-import ShoppingCartModal from './components/ShoppingCartModal.vue';
-
+import DarkLightMode from './components/LightDarkSwitcher.vue';
 </script>
 
 <style>
