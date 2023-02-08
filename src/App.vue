@@ -7,26 +7,17 @@
         <component :is="Component" />
       </transition>
     </RouterView>
-    <ShoppingCartInfo @click="toggleShoppingCart" />
-    <ShoppingCart v-show="showShoppingCart" @update:total-items-count="updateCartCount" />
+   <ShoppingCartModal />
+    
     <RouterView name="FooterBar"></RouterView>
-  
+    <DarkLightMode />
+
 </template>
 
 <script setup>
-import { ref } from 'vue';
-import ShoppingCart from './components/shoppingCart/ShoppingCart.vue';
-import ShoppingCartInfo from './components/shoppingCart/ShoppingCartInfo.vue';
+import DarkLightMode from './components/LightDarkSwitcher.vue'
+import ShoppingCartModal from './components/ShoppingCartModal.vue';
 
-const showShoppingCart = ref(false);
-const toggleShoppingCart = () => {
-  showShoppingCart.value = !showShoppingCart.value;
-};
-
-const shoppingCartCount = ref(0);
-const updateCartCount = count => {
-  shoppingCartCount.value = count;
-};
 </script>
 
 <style>
