@@ -1,5 +1,5 @@
 <template>
-  <v-card elevation="8" width="200" class="ma-5 flex-md-grow-1">
+  <v-card elevation="8" width="200" class="ma-5 flex-md-grow-1 ">
     <v-img lazy-src  :src="props.cocktail.imageUrl"></v-img>
     <v-card-item>
       <v-card-title>

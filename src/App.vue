@@ -6,8 +6,8 @@
       </transition>
     </RouterView>
 
-    <DarkLightMode />
-    <RouterView name="FooterBar"></RouterView>
+    
+    
     <RouterView name="BottomNavigationBar"></RouterView>
   </v-app>
 </template>

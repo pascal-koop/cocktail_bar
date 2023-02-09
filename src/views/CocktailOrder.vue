@@ -3,14 +3,14 @@
     <h1>Cocktails</h1>
     <CocktailMenuNav />
     <CocktailGrid />
-   
+    <DarkLightMode />
   </div>
 </template>
 
 <script setup>
 import CocktailGrid from '../components/cocktailMenu/CocktailGrid.vue';
 import CocktailMenuNav from '../components/cocktailMenu/CocktailMenuNav.vue';
-
+import DarkLightMode from '../components/LightDarkSwitcher.vue';
 
 </script>
 

@@ -18,13 +18,17 @@
       <CartModal />
       <span>Cart</span>
     </v-btn>
+
+    <v-btn>
+    
+    <span>switch</span>
+    </v-btn>
   </v-bottom-navigation>
 </template>
 
 <script setup>
 import { useCartStore } from '../stores/CartStore';
 import CartModal from './modal/CartModal.vue';
-
 import SvgIcon from '@jamescoyle/vue-icon';
 import { mdiHome, mdiGlassCocktail, mdiBasket } from '@mdi/js';
 const cartStore = useCartStore()

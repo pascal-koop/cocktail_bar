@@ -1,5 +1,5 @@
 <template>
-  <div class="d-flex flex-wrap justify-center align-self-end ">
+  <div class="d-flex flex-wrap justify-center align-self-end h-auto align-end">
     <v-sheet v-for="(cocktail, _index) in cocktailStore.getCocktailsForSelectedCategory">
       <CocktailCards
         :key="cocktail.name"

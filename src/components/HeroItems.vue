@@ -1,15 +1,13 @@
 <template>
   <div class="welcome">
-    <img
-      loading="lazy"
-      src="../assets/hero_banner_horizontal.png"
-      alt="A photograph of a red neon sign that says bar in big letters"
-    />
+    
     <h1>Cocktail Bar</h1>
+    <div class="hero-txt-wrapper">
     <p class="welcome-txt">
       Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima repellat provident nihil omnis
       dolorum exercitationem consectetur odio ad dolore quae. Tenetur, ratione eaque. Ut quis
     </p>
+    </div>
   </div>
 </template>
 
@@ -25,4 +23,24 @@
   margin: 1rem 0;
 }
 
+.welcome {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin: 0 auto;
+  padding: 2rem 0;
+}
+ .hero-txt-wrapper {
+  width: 50%;
+  margin: 24px auto;
+  background-color: hsla(0, 0%, 0%, 0.407);
+
+ }
+
+ .hero-txt-wrapper > p{
+  color: antiquewhite;
+  
+ }
 </style>
