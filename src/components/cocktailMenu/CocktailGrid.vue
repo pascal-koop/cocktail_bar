@@ -20,7 +20,7 @@ function addCocktailToCart(cocktailId) {
   const identifiedCocktail = cocktailStore.cocktailsMenu.find(
     cocktail => cocktail.id === cocktailId
   );
-
+  
   cocktailStore.addToCart(identifiedCocktail);
 }
 </script>

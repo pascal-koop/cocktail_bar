@@ -26,6 +26,7 @@ const darkMode = ref(false);
 
 const toggleTheme = () => {
   theme.global.name.value = darkMode.value ? 'dark' : 'light';
+ console.log(darkMode.value);
   // Optional: Get value of current theme
   console.log(`Current theme is dark? ${theme.global.current.value.dark}`);
 };
