@@ -11,7 +11,7 @@
     </v-btn>
 
     <v-btn value="nearby">
-      <v-badge color="#4caf50" offset-y="2" offset-x="-8" :content="cartStore.totalItemsCount" theme="light">
+      <v-badge color="#d1324a" offset-y="2" offset-x="-8" :content="cartStore.totalItemsCount" theme="light">
         <svg-icon type="mdi" :path="basket"></svg-icon>
       </v-badge>
 
@@ -19,10 +19,7 @@
       <span>Cart</span>
     </v-btn>
 
-    <v-btn>
     
-    <span>switch</span>
-    </v-btn>
   </v-bottom-navigation>
 </template>
 

@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router';
-
-
+import SignUpForm from '../components/checkout/SignUpForm.vue'
+import LoginForm from '../components/checkout/LoginForm.vue'
 // routing
 const routes = [
   {
@@ -9,7 +9,6 @@ const routes = [
     components: {
       default: () => import('../views/Home.vue'),
       BottomNavigationBar: () => import('../components/BottomNavigationBar.vue'),
-      FooterBar: () => import('../components/FooterBar.vue'),
     },
   },
   {
@@ -18,7 +17,7 @@ const routes = [
     components: {
       default: () => import('../views/CocktailOrder.vue'),
       BottomNavigationBar: () => import('../components/BottomNavigationBar.vue'),
-      FooterBar: () => import('../components/FooterBar.vue'),
+      
     },
   },
   {
@@ -27,8 +26,19 @@ const routes = [
     components: {
       default: () => import('../views/CartCheckout.vue'),
       BottomNavigationBar: () => import('../components/BottomNavigationBar.vue'),
-      FooterBar: () => import('../components/FooterBar.vue'),
     },
+    children: [
+      {
+      path: '/checkout/login',
+     
+      component: LoginForm
+    },
+      {
+      path: '/checkout/signup',
+      component: SignUpForm
+    }
+  ],
+
   },
 ];
 const router = createRouter({

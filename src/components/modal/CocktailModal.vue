@@ -1,6 +1,7 @@
 <template>
   <v-dialog
     fullscreen
+    height="95.7vh"
     v-model="dialog"
     activator="parent"
     scroll-strategy="block"
