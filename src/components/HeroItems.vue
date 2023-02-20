@@ -11,7 +11,7 @@
     </div>
     <div class="button-wrapper mb-7">
     <v-btn class="ma-4" to="/cocktails">Take Order</v-btn>
-    <v-btn class="" to="/cocktails">Logn Or Sign In</v-btn>
+    <v-btn class="" to="/login">Login Or Sign In</v-btn>
     </div>
   </v-container>
 </template>

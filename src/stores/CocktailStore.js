@@ -110,7 +110,7 @@ export const useCocktailStore = defineStore('cocktailStore', {
     getSelectedCategory: state => {
       return state.selectedCategory;
     },
-    getCocktailsForSelectedCategory: state => {
+    getCocktailsForSelectedCategory: state =>  {
       if (state.selectedCategory === 'All') {
         return state.cocktailsMenu;
       }

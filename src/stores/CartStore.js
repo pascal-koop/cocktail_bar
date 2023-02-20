@@ -1,8 +1,10 @@
 import { defineStore } from 'pinia';
+import { RouterLink } from 'vue-router';
 
 export const useCartStore = defineStore('cartStore', {
   state: () => {
     return {
+      userWasAboutToCheckout: false,
       cartItem: [
         
       ],
@@ -17,4 +19,11 @@ export const useCartStore = defineStore('cartStore', {
       return total;
     },
   },
+  actions: {
+    setUserWasAboutToCheckOut() {
+      this.userWasAboutToCheckout = true;
+      
+      console.log(333)
+    }
+  }
 });

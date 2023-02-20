@@ -12,4 +12,17 @@
 import BottomNavigationBar from './components/BottomNavigationBar.vue';
 </script>
 
-<style></style>
+<style>
+.route-enter-from {
+  opacity: 0;
+  transform: translateX(-100px);
+}
+.route-enter-active,
+.route-leave-active {
+  transition: all 0.2s ease-out;
+}
+.route-leave-to {
+  opacity: 0;
+  transform: translateX(100px);
+}
+</style>

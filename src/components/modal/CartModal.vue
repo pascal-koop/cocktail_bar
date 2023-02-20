@@ -18,7 +18,7 @@
           </div>
         </v-toolbar-title>
         <v-spacer></v-spacer>
-        <v-btn id="checkout-btn" to="/checkout" @click="dialog = false">Checkout</v-btn>
+        <v-btn id="checkout-btn" to="/login" @click="checkOut">Checkout</v-btn>
       </v-toolbar>
       <div class="total-wrapper">
         <p>
@@ -67,6 +67,13 @@ const emit = defineEmits(['update:total-items-count']);
 onMounted(() => {
   emit('update:total-items-count', totalItemsCount);
 });
+
+function checkOut() {
+  dialog.value = false;
+  
+  cartStore.setUserWasAboutToCheckOut()
+  
+}
 
 const totalPriceSum = computed(() => {
   let totalPrice = 0;

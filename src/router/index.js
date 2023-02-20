@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import SignUpForm from '../components/checkout/SignUpForm.vue';
-import LoginForm from '../components/checkout/LoginForm.vue';
+import SignUpForm from '../components/auth/SignUpForm.vue';
+import LoginForm from '../components/auth/LoginForm.vue';
 import PathNotFound from '../components/PathNotFound.vue';
 import CocktailOrder from '../../src/views/CocktailOrder.vue';
 import Checkout from '../views/CartCheckout.vue';
@@ -23,8 +23,8 @@ const routes = [
     component: LoginForm,
   },
   {
-    path: '/signup',
-    name: 'SignUp',
+    path: '/register',
+    name: 'Register',
     component: SignUpForm,
   },
   {
