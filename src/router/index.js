@@ -1,44 +1,40 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import SignUpForm from '../components/checkout/SignUpForm.vue'
-import LoginForm from '../components/checkout/LoginForm.vue'
+import SignUpForm from '../components/checkout/SignUpForm.vue';
+import LoginForm from '../components/checkout/LoginForm.vue';
+import PathNotFound from '../components/PathNotFound.vue';
+import CocktailOrder from '../../src/views/CocktailOrder.vue';
+import Checkout from '../views/CartCheckout.vue';
+import Home from '../views/Home.vue';
 // routing
 const routes = [
   {
     path: '/',
     name: 'Home',
-    components: {
-      default: () => import('../views/Home.vue'),
-      BottomNavigationBar: () => import('../components/BottomNavigationBar.vue'),
-    },
+    component: Home,
   },
   {
     path: '/cocktails',
     name: 'CocktailOrder',
-    components: {
-      default: () => import('../views/CocktailOrder.vue'),
-      BottomNavigationBar: () => import('../components/BottomNavigationBar.vue'),
-      
-    },
+    component: CocktailOrder,
+  },
+  {
+    path: '/login',
+    name: 'Login',
+    component: LoginForm,
+  },
+  {
+    path: '/signup',
+    name: 'SignUp',
+    component: SignUpForm,
   },
   {
     path: '/checkout',
     name: 'Checkout',
-    components: {
-      default: () => import('../views/CartCheckout.vue'),
-      BottomNavigationBar: () => import('../components/BottomNavigationBar.vue'),
-    },
-    children: [
-      {
-      path: '/checkout/login',
-     
-      component: LoginForm
-    },
-      {
-      path: '/checkout/signup',
-      component: SignUpForm
-    }
-  ],
-
+    component: Checkout,
+  },
+  {
+    path: '/:pathMatch(.*)*',
+    component: PathNotFound,
   },
 ];
 const router = createRouter({

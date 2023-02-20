@@ -1,19 +1,15 @@
 <template>
   <v-app>
-
-    <RouterView name="default" v-slot="{ Component }">
-      <transition name="route" mode="out-in" appear>
-        <component :is="Component" />
-      </transition>
-    </RouterView>
-    <RouterView name="BottomNavigationBar"></RouterView>
+    <transition name="route" mode="out-in" appear>
+      <router-view> </router-view>
+    </transition>
+    <BottomNavigationBar />
   </v-app>
 </template>
 
 <script setup>
-import DarkLightMode from './components/LightDarkSwitcher.vue';
+//import DarkLightMode from './components/LightDarkSwitcher.vue';
+import BottomNavigationBar from './components/BottomNavigationBar.vue';
 </script>
 
-<style>
-
-</style>
+<style></style>
