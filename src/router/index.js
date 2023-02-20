@@ -5,6 +5,7 @@ import PathNotFound from '../components/PathNotFound.vue';
 import CocktailOrder from '../../src/views/CocktailOrder.vue';
 import Checkout from '../views/CartCheckout.vue';
 import Home from '../views/Home.vue';
+import User from '../views/User.vue';
 // routing
 const routes = [
   {
@@ -31,6 +32,11 @@ const routes = [
     path: '/checkout',
     name: 'Checkout',
     component: Checkout,
+  },
+  {
+    path: '/user',
+    name: 'User',
+    component: User,
   },
   {
     path: '/:pathMatch(.*)*',

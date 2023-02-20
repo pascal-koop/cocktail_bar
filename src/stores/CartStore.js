@@ -5,6 +5,7 @@ export const useCartStore = defineStore('cartStore', {
   state: () => {
     return {
       userWasAboutToCheckout: false,
+      isUserOnline: true,
       cartItem: [
         
       ],
