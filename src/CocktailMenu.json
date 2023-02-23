@@ -1,0 +1,41 @@
+{
+  "cocktails": [
+    {
+      "id": 1,
+      "name": "Mojito",
+      "price": 10,
+      "amount": 1,
+      "cartImage": "/images/cartImages/mojito.png",
+      "imageUrl": "/images/menuImages/mojito.jpeg",
+      "category": "Sour",
+      "ingredients": ["Weißer Rohrzucker", "Limette", "Minzezweige", "Weißer Rum", "Mineralwasser"]
+    },
+    {
+      "id": 4,
+      "name": "Mai Tai",
+      "price": 10,
+      "amount": 1,
+      "cartImage": "/images/cartImages/mai_tai_cart.png",
+      "imageUrl": "/images/menuImages/mai_tai.jpeg",
+      "category": "Fruity"
+    },
+    {
+      "id": 5,
+      "name": "Mint Julep",
+      "price": 10,
+      "amount": 1,
+      "imageUrl": "/images/menuImages/mint_julep.jpeg",
+      "cartImage": "/images/cartImages/mint_julep_cart.png",
+      "category": "Sweet"
+    },
+    {
+      "id": 25,
+      "name": "Heineken",
+      "price": 3.5,
+      "amount": 1,
+      "imageUrl": "/images/menuImages/heineken.jpeg",
+      "cartImage": "/images/cartImages/heineken_cart.png",
+      "category": "Beer"
+    }
+  ]
+}

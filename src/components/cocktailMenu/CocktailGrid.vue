@@ -11,9 +11,12 @@
 </template>
 
 <script setup>
+import { onBeforeMount} from 'vue';
 import { useCocktailStore } from '../../stores/cocktailStore';
 import CocktailCards from './CocktailCards.vue';
-
+onBeforeMount(() => {
+  cocktailStore.fetchCocktails();
+});
 const cocktailStore = useCocktailStore();
 
 function addCocktailToCart(cocktailId) {
