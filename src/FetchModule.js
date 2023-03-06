@@ -1,18 +1,31 @@
-const url = new URL('http://localhost:8000/cocktails');
+const cocktailsUrl = new URL('http://localhost:8000/cocktails');
+const registerUrl = new URL('http://localhost:8000/register');
 
-// Async/Await
-
-async function fetchData() {
-  const response = await fetch(url);
+async function fetchCocktailMenu() {
+  const response = await fetch(cocktailsUrl);
   if (!response.ok) {
     const message = `An error has occured: ${response.status}`;
     throw new Error(message);
   }
-  console.log(response.headers);
   const data = await response.json();
-  console.log("Data:");
-  console.log(data);
+  return data;
+}
 
+async function postRegisterForm(newUser) {
+  console.log(newUser);
+  const response = await fetch(registerUrl, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(newUser),
+  });
+  if (!response.ok) {
+    const message = `An error has occured: ${response.status}`;
+    throw new Error(message);
+  }
+  const data = await response.json();
+  console.log(data);
   return data;
 }
 
@@ -40,4 +53,4 @@ function fetchData() {
 }
 */
 
-export { fetchData };
+export { fetchCocktailMenu, postRegisterForm };

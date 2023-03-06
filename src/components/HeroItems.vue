@@ -30,8 +30,7 @@
   padding: 2rem 0;
 }
 
-.welcome > button {
-}
+
 .welcome-txt {
   font-size: 1.5rem;
   font-weight: 400;

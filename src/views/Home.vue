@@ -9,23 +9,23 @@
 </template>
 
 <script setup>
-import { ref, onBeforeMount } from 'vue';
+//import { ref, onBeforeMount } from 'vue';
 import HeroItems from '../components/HeroItems.vue';
-import { fetchData } from '../FetchModule';
+//import { fetchData } from '../FetchModule';
 
 // onBeforeMount(() => {
 //   giveData();
 // });
-const fetchedData = ref([]);
-const giveData = async () => {
-  try {
-    const data = await fetchData();
+// const fetchedData = ref([]);
+// const giveData = async () => {
+//   try {
+//     const data = await fetchData();
 
-    fetchedData.value = data;
-  } catch (error) {
-    console.log(error.message);
-  }
-};
+//     fetchedData.value = data;
+//   } catch (error) {
+//     console.log(error.message);
+//   }
+// };
 
 // async fetch
 // const giveData = () => {

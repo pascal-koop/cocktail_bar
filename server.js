@@ -1,10 +1,16 @@
 import express from 'express';
 // cors is a middleware to enable access shared resources
+// and allows to relax the security applied to an API. 
 import cors from 'cors';
 import fs from 'fs/promises';
+import bodyParser from 'body-parser';
 const app = express();
-
-app.use(cors());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+// verhindert den zugriff von URls die keinen zugriff auf den Server haben sollten
+app.use(cors({
+  origin: ['http://localhost:5173']
+}));
 app.get('/cocktails', (req, res) => {
   fs.readFile('./src/CocktailMenu.json', 'utf-8')
     .then(data => {
@@ -15,6 +21,11 @@ app.get('/cocktails', (req, res) => {
       res.status(500).json({ error: error.message });
     });
     
+});
+
+app.post('/register', (req, res) => {
+  let user = req.body;
+  res.json(user);
 });
 
 const { PORT = 8000 } = process.env;

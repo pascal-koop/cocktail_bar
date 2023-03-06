@@ -20,7 +20,7 @@ onBeforeMount(() => {
 const cocktailStore = useCocktailStore();
 
 function addCocktailToCart(cocktailId) {
-  const identifiedCocktail = cocktailStore.cocktailsMenu.find(
+  const identifiedCocktail = cocktailStore.cocktailsMenu.cocktails.find(
     cocktail => cocktail.id === cocktailId
   );
   

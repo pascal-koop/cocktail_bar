@@ -35,7 +35,7 @@ const props = defineProps(['cocktail']);
 //let image = '../../../public/vite.svg';
 //? logik in den Store verlagern?  weil doppelt hier und in cocktailGrid.vue
 function addToCart(cocktailId) {
-  const identifiedCocktail = cocktailStore.cocktailsMenu.find(
+  const identifiedCocktail = cocktailStore.cocktailsMenu.cocktails.find(
     cocktail => cocktail.id === cocktailId
   );
 

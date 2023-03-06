@@ -8,7 +8,8 @@
       "cartImage": "/images/cartImages/mojito.png",
       "imageUrl": "/images/menuImages/mojito.jpeg",
       "category": "Sour",
-      "ingredients": ["Weißer Rohrzucker", "Limette", "Minzezweige", "Weißer Rum", "Mineralwasser"]
+      "ingredients": ["Weißer Rohrzucker", "Limette", "Minzezweige", "Weißer Rum", "Mineralwasser"],
+      "history": ""
     },
     {
       "id": 4,
@@ -36,6 +37,42 @@
       "imageUrl": "/images/menuImages/heineken.jpeg",
       "cartImage": "/images/cartImages/heineken_cart.png",
       "category": "Beer"
+    },
+    {
+      "id": 26,
+      "name": "Budweiser",
+      "price": 3.5,
+      "amount": 1,
+      "imageUrl": "/images/menuImages/budweiser.jpeg",
+      "cartImage": "/images/cartImages/budweiser_cart.png",
+      "category": "Beer"
+    },
+    {
+      "id": 27,
+      "name": "Corona",
+      "price": 3.5,
+      "amount": 1,
+      "imageUrl": "/images/menuImages/corona.jpeg",
+      "cartImage": "/images/cartImages/corona_cart.png",
+      "category": "Beer"
+    },
+    {
+      "id": 29,
+      "name": "Peroni",
+      "price": 3.5,
+      "amount": 1,
+      "imageUrl": "/images/menuImages/peroni.jpeg",
+      "cartImage": "/images/cartImages/peroni_cart.png",
+      "category": "Beer"
+    },
+    {
+      "id": 30,
+      "name": "Aperol Spritz",
+      "price": 8,
+      "amount": 1,
+      "imageUrl": "/images/menuImages/aperol_spritz.jpeg",
+      "cartImage": "/images/cartImages/aperol_spritz_cart.png",
+      "category": "Prosecco"
     }
   ]
 }

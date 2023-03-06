@@ -1,11 +1,10 @@
 import { defineStore } from 'pinia';
-import { RouterLink } from 'vue-router';
+
 
 export const useCartStore = defineStore('cartStore', {
   state: () => {
     return {
-      userWasAboutToCheckout: false,
-      isUserOnline: true,
+      
       cartItem: [
         
       ],

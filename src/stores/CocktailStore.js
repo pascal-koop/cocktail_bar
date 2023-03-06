@@ -1,8 +1,7 @@
-import { EMPTY_ARR } from '@vue/shared';
-import { defineStore } from 'pinia';
+ import { defineStore } from 'pinia';
 import { useCartStore } from '../stores/CartStore';
 
-import { fetchData } from '../FetchModule';
+import { fetchCocktailMenu } from '../FetchModule';
 
 export const useCocktailStore = defineStore('cocktailStore', {
   state: () => {
@@ -21,10 +20,12 @@ export const useCocktailStore = defineStore('cocktailStore', {
     },
     getCocktailsForSelectedCategory: state => {
       if (state.selectedCategory === 'All') {
-        return state.cocktailsMenu;
+        return state.cocktailsMenu.cocktails;
       }
 
-      return state.cocktailsMenu.filter(cocktail => cocktail.category === state.selectedCategory);
+      return state.cocktailsMenu.cocktails.filter(
+        cocktail => cocktail.category === state.selectedCategory
+      );
     },
     getSelectedCocktailForInfo: state => {
       return state.selectedCocktail;
@@ -41,8 +42,7 @@ export const useCocktailStore = defineStore('cocktailStore', {
       this.selectedCategory = category;
     },
     setSelectedCocktail(cocktailId) {
-      //let rightCocktail;
-      for (const cocktail in this.cocktailsMenu) {
+      for (const cocktail in this.cocktailsMenu.cocktails) {
         if (cocktail.id === cocktailId) {
           this.selectedCocktail = cocktail;
           console.log(this.selectedCocktail);
@@ -60,8 +60,8 @@ export const useCocktailStore = defineStore('cocktailStore', {
       cartStore.cartItem.push(item);
     },
     async fetchCocktails() {
-      const data = await fetchData();
+      const data = await fetchCocktailMenu();
       this.cocktailsMenu = data;
-    }
+    },
   },
 });
