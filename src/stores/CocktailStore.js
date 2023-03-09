@@ -1,4 +1,4 @@
- import { defineStore } from 'pinia';
+import { defineStore } from 'pinia';
 import { useCartStore } from '../stores/CartStore';
 
 import { fetchCocktailMenu } from '../FetchModule';
@@ -6,7 +6,7 @@ import { fetchCocktailMenu } from '../FetchModule';
 export const useCocktailStore = defineStore('cocktailStore', {
   state: () => {
     return {
-      categorys: ['All', 'Sour', 'Bitter', 'Fruity', 'Sweet', 'Beer', 'Prosecco'],
+      categories: ['All', 'Sour', 'Bitter', 'Fruity', 'Sweet', 'Beer', 'Prosecco'],
 
       selectedCategory: 'All',
       selectedCocktail: '',
@@ -20,18 +20,17 @@ export const useCocktailStore = defineStore('cocktailStore', {
     },
     getCocktailsForSelectedCategory: state => {
       if (state.selectedCategory === 'All') {
-        return state.cocktailsMenu.cocktails;
+        return state.cocktailsMenu;
       }
 
-      return state.cocktailsMenu.cocktails.filter(
-        cocktail => cocktail.category === state.selectedCategory
-      );
+      return state.cocktailsMenu.filter(cocktail => cocktail.category === state.selectedCategory);
     },
     getSelectedCocktailForInfo: state => {
       return state.selectedCocktail;
     },
     getIngredients() {
       for (const cocktail of this.selectedCocktail) {
+        console.log(cocktail);
         return cocktail.ingredients;
       }
       this.selectedCocktail;
@@ -45,14 +44,13 @@ export const useCocktailStore = defineStore('cocktailStore', {
       for (const cocktail in this.cocktailsMenu.cocktails) {
         if (cocktail.id === cocktailId) {
           this.selectedCocktail = cocktail;
-          console.log(this.selectedCocktail);
         }
       }
     },
     addToCart(item) {
       const cartStore = useCartStore();
       for (const cocktail of cartStore.cartItem) {
-        if (cocktail.id === item.id) {
+        if (cocktail.cocktail_id === item.cocktail_id) {
           cocktail.amount++;
           return;
         }
@@ -61,6 +59,10 @@ export const useCocktailStore = defineStore('cocktailStore', {
     },
     async fetchCocktails() {
       const data = await fetchCocktailMenu();
+      for (const cocktail of data) {
+        cocktail['amount'] = 1;
+        cocktail.ingredients = cocktail.ingredients.split(',');
+      }
       this.cocktailsMenu = data;
     },
   },

@@ -1,4 +1,5 @@
 import { defineStore } from 'pinia';
+import { fetchHistory, fetchUserDataFromDb } from '../FetchModule';
 
 
 export const useUserStore = defineStore('userStore', {
@@ -7,12 +8,17 @@ export const useUserStore = defineStore('userStore', {
       user: {},
       loggedIn: false,
       userWasAboutToCheckout: false,
-      isUserOnline: false,
+      isUserOnline: true,
     };
   },
   actions: {
-    // async postRegisterForm(formContent) {
-      
-    // }
+    async fetchUserHistory() {
+      const history = await fetchHistory();
+      console.log(history);
+    },
+    async fetchUserData() {
+      const data = await fetchUserDataFromDb();
+      console.log(data);
+    }
   }
 });

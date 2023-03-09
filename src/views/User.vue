@@ -2,7 +2,7 @@
   <h1 class="text-h1">Hey User</h1>
   <v-card>
     <v-tabs bg-color="cyan-lighten-5" v-model="tab">
-      <v-tab value="user">Info {{ UserName }}</v-tab>
+      <v-tab value="user">Info</v-tab>
       <v-tab value="history">Order History</v-tab>
     </v-tabs>
     <v-card-text>
@@ -22,6 +22,8 @@
 import { ref } from 'vue';
 import UserInformation from '../components/userInfo/UserInformation.vue';
 import OrderHistory from '../components/userInfo/OrderHistory.vue';
+
+
 const tab = ref(null);
 </script>
 

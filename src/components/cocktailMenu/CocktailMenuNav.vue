@@ -9,7 +9,7 @@
     >
       <v-tab
         @click="cocktailStore.setSelectedCategory(index)"
-        v-for="index in cocktailStore.categorys"
+        v-for="index in cocktailStore.categories"
         :key="index"
         :value="index"
       >

@@ -1,21 +1,21 @@
 <template>
   <v-card elevation="8" width="200" class="ma-5 flex-md-grow-1">
-    <v-img lazy-src :src="props.cocktail.imageUrl"></v-img>
+    <v-img lazy-src :src="props.cocktail.image_url"></v-img>
     <v-card-item>
       <v-card-title>
-        {{ props.cocktail.name }}
+        {{ props.cocktail.cocktail_name }}
       </v-card-title>
-      <v-card-subtitle> {{ props.cocktail.price }} € </v-card-subtitle>
+      <v-card-subtitle> {{ props.cocktail.cocktail_price }} € </v-card-subtitle>
       <v-card-actions>
         <v-btn @click="addCocktailToCart"> Buy </v-btn>
-        <v-btn @click.capture="cocktailStore.setSelectedCocktail(props.cocktail.id)">
+        <v-btn @click.capture="cocktailStore.setSelectedCocktail(props.cocktail.cocktail_id)">
           <CocktailModal
-            :key="props.cocktail.id"
-            :id="props.cocktail.id"
-            :cocktail-name="props.cocktail.name"
-            :cocktail-price="props.cocktail.price"
-            :cocktail-history="props.cocktail.history"
-            :img-url="props.cocktail.imageUrl"
+            :key="props.cocktail.cocktail_id"
+            :id="props.cocktail.cocktail_id"
+            :cocktail-name="props.cocktail.cocktail_name"
+            :cocktail-price="props.cocktail.cocktail_price"
+            :cocktail-history="props.cocktail.cocktail_history"
+            :img-url="props.cocktail.image_url"
             :ingredients="props.cocktail.ingredients"
             @add-cocktail-to-cart="addToCart"
           ></CocktailModal>
@@ -35,15 +35,15 @@ const props = defineProps(['cocktail']);
 //let image = '../../../public/vite.svg';
 //? logik in den Store verlagern?  weil doppelt hier und in cocktailGrid.vue
 function addToCart(cocktailId) {
-  const identifiedCocktail = cocktailStore.cocktailsMenu.cocktails.find(
-    cocktail => cocktail.id === cocktailId
+  const identifiedCocktail = cocktailStore.cocktailsMenu.find(
+    cocktail => cocktail.cocktai_id === cocktailId
   );
 
   cocktailStore.addToCart(identifiedCocktail);
 }
 
 function addCocktailToCart() {
-  emit('add-cocktail-to-cart', props.cocktail.id);
+  emit('add-cocktail-to-cart', props.cocktail.cocktail_id);
 }
 </script>
 

@@ -18,7 +18,7 @@
           </div>
         </v-toolbar-title>
         <v-spacer></v-spacer>
-        <v-btn id="checkout-btn" to="/login" @click="checkOut">Checkout</v-btn>
+        <v-btn id="checkout-btn" to="" @click="cartStore.postCart">Checkout</v-btn>
       </v-toolbar>
       <div class="total-wrapper">
         <p>
@@ -38,12 +38,12 @@
         <cart-item
           class="ma-4"
           v-for="cocktail in cartStore.cartItem"
-          :key="cocktail.name"
-          :id="cocktail.id"
-          :cocktail-name="cocktail.name"
-          :cocktail-price="cocktail.price"
+          :key="cocktail.cocktail_name"
+          :id="cocktail.cocktail_id"
+          :cocktail-name="cocktail.cocktail_name"
+          :cocktail-price="cocktail.cocktail_price"
           :amount="cocktail.amount"
-          :image-url="cocktail.imageUrl"
+          :image-url="cocktail.image_url"
           @increment-item="incrementAmount"
           @decrement-item="decrementAmount"
           @delete-item="deleteItem"
@@ -55,6 +55,7 @@
 <script setup>
 import { onMounted, computed } from 'vue';
 import { useCartStore } from '../../stores/CartStore';
+
 import { ref } from 'vue';
 import SvgIcon from '@jamescoyle/vue-icon';
 import { mdiClose } from '@mdi/js';
@@ -69,16 +70,14 @@ onMounted(() => {
 });
 
 function checkOut() {
-  dialog.value = false;
-  
-  cartStore.setUserWasAboutToCheckOut()
-  
+  //dialog.value = false;
+  //cartStore.setUserWasAboutToCheckOut()
 }
 
 const totalPriceSum = computed(() => {
   let totalPrice = 0;
   for (const cartItem of cartStore.cartItem) {
-    totalPrice += cartItem.amount * cartItem.price;
+    totalPrice += cartItem.amount * cartItem.cocktail_price;
   }
   return totalPrice;
 });
@@ -98,14 +97,18 @@ const totalItemsCount = computed(() => {
 });
 
 function incrementAmount(cocktailId) {
-  const identifiedCocktail = cartStore.cartItem.find(cocktail => cocktail.id === cocktailId);
+  const identifiedCocktail = cartStore.cartItem.find(
+    cocktail => cocktail.cocktail_id === cocktailId
+  );
   identifiedCocktail.amount += 1;
 }
 
 function decrementAmount(cocktailId) {
-  const identifiedCocktail = cartStore.cartItem.find(cocktail => cocktail.id === cocktailId);
+  const identifiedCocktail = cartStore.cartItem.find(
+    cocktail => cocktail.cocktail_id === cocktailId
+  );
   const identifiedCocktailIndex = cartStore.cartItem.findIndex(
-    cocktail => cocktail.id === cocktailId
+    cocktail => cocktail.cocktail_id === cocktailId
   );
   identifiedCocktail.amount -= 1;
   if (identifiedCocktail.amount === 0) {
@@ -114,7 +117,9 @@ function decrementAmount(cocktailId) {
 }
 
 function deleteItem(cocktailId) {
-  const identifiedCocktail = cartStore.cartItem.find(cocktail => cocktail.id === cocktailId);
+  const identifiedCocktail = cartStore.cartItem.find(
+    cocktail => cocktail.cocktail_id === cocktailId
+  );
   cartStore.cartItem.splice(identifiedCocktail, 1);
 }
 </script>

@@ -62,6 +62,7 @@ import SvgIcon from '@jamescoyle/vue-icon';
 import { mdiClose } from '@mdi/js';
 import { useCocktailStore } from '../../stores/cocktailStore';
 const cocktailStore = useCocktailStore();
+
 const props = defineProps([
   'id',
   'imgUrl',
@@ -74,7 +75,8 @@ const emit = defineEmits(['add-cocktail-to-cart']);
 const close = mdiClose;
 
 const addCocktailToCart = () => {
-  emit('add-cocktail-to-cart', props.id);
+  emit('add-cocktail-to-cart', props.cocktail_id);
+ 
 };
 
 let dialog = ref(false);

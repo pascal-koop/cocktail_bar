@@ -2,7 +2,7 @@
   <div class="d-flex flex-wrap justify-center align-self-end h-auto align-end">
     <v-sheet v-for="(cocktail, _index) in cocktailStore.getCocktailsForSelectedCategory">
       <CocktailCards
-        :key="cocktail.name"
+        :key="cocktail.cocktail_name"
         :cocktail="cocktail"
         @add-cocktail-to-cart="addCocktailToCart"
       ></CocktailCards>
@@ -14,14 +14,16 @@
 import { onBeforeMount} from 'vue';
 import { useCocktailStore } from '../../stores/cocktailStore';
 import CocktailCards from './CocktailCards.vue';
+import { useCartStore } from '../../stores/CartStore';
 onBeforeMount(() => {
   cocktailStore.fetchCocktails();
 });
 const cocktailStore = useCocktailStore();
+const cartStore = useCartStore();
 
 function addCocktailToCart(cocktailId) {
-  const identifiedCocktail = cocktailStore.cocktailsMenu.cocktails.find(
-    cocktail => cocktail.id === cocktailId
+  const identifiedCocktail = cocktailStore.cocktailsMenu.find(
+    cocktail => cocktail.cocktail_id === cocktailId
   );
   
   cocktailStore.addToCart(identifiedCocktail);

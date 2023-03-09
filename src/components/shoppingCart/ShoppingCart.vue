@@ -8,12 +8,12 @@
       <div class="cart-item-list">
         <cart-item
           v-for="cocktail in cartStore.cartItem"
-          :key="cocktail.name"
-          :id="cocktail.id"
-          :cocktail-name="cocktail.name"
-          :cocktail-price="cocktail.price"
-          :amount="cocktail.amount"
-          :cart-Image="cocktail.cartImage"
+          :key="cocktail.cocktail_name"
+          :id="cocktail.cocktail_id"
+          :cocktail-name="cocktail.cocktail_name"
+          :cocktail-price="cocktail.cocktail_price"
+          :amount="cocktail.cocktail_amount"
+          :cart-Image="cocktail.cart_image_url"
           @increment-item="incrementAmount"
           @decrement-item="decrementAmount"
           @delete-item="deleteItem"
@@ -39,8 +39,9 @@
   const totalPriceSum = computed(() => {
     let totalPrice = 0;
     for (const cartItem of cartStore.cartItem) {
-      totalPrice += cartItem.amount * cartItem.price;
+      totalPrice += cartItem.amount * cartItem.cocktail_price;
     }
+    
     return totalPrice;
   });
 
@@ -55,14 +56,14 @@
 
 
   function incrementAmount(cocktailId) {
-      const identifiedCocktail = cartStore.cartItem.find(cocktail => cocktail.id === cocktailId);
+      const identifiedCocktail = cartStore.cartItem.find(cocktail => cocktail.cocktail_id === cocktailId);
       identifiedCocktail.amount += 1;
   };
 
   function decrementAmount(cocktailId) {
-    const identifiedCocktail = cartStore.cartItem.find(cocktail => cocktail.id === cocktailId);
+    const identifiedCocktail = cartStore.cartItem.find(cocktail => cocktail.cocktail_id === cocktailId);
     const identifiedCocktailIndex = cartStore.cartItem.findIndex(
-      cocktail => cocktail.id === cocktailId
+      cocktail => cocktail.cocktail_id === cocktailId
     );
     identifiedCocktail.amount -= 1;
     if (identifiedCocktail.amount === 0) {
@@ -71,9 +72,7 @@
   };
 
   function deleteItem(cocktailId) {
-    const identifiedCocktail = cartStore.cartItem.find(cocktail => cocktail.id === cocktailId);
+    const identifiedCocktail = cartStore.cartItem.find(cocktail => cocktail.cocktail_id === cocktailId);
     cartStore.cartItem.splice(identifiedCocktail, 1);
   }
-
-  
 </script>

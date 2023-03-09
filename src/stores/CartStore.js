@@ -1,13 +1,10 @@
 import { defineStore } from 'pinia';
-
+import { postCartToDb } from '../FetchModule';
 
 export const useCartStore = defineStore('cartStore', {
   state: () => {
     return {
-      
-      cartItem: [
-        
-      ],
+      cartItem: [],
     };
   },
   getters: {
@@ -22,8 +19,13 @@ export const useCartStore = defineStore('cartStore', {
   actions: {
     setUserWasAboutToCheckOut() {
       this.userWasAboutToCheckout = true;
+    },
+    async postCart(){
+     
+      await postCartToDb(this.cartItem)
       
-      console.log(333)
+      console.log(data);
     }
-  }
+
+  },
 });
