@@ -5,7 +5,8 @@ import { fetchHistory, fetchUserDataFromDb } from '../FetchModule';
 export const useUserStore = defineStore('userStore', {
   state: () => {
     return {
-      user: {},
+      user: [],
+      history: [],
       loggedIn: false,
       userWasAboutToCheckout: false,
       isUserOnline: true,
@@ -14,11 +15,13 @@ export const useUserStore = defineStore('userStore', {
   actions: {
     async fetchUserHistory() {
       const history = await fetchHistory();
-      console.log(history);
+      this.history = history;
+      console.log(this.history);
     },
     async fetchUserData() {
       const data = await fetchUserDataFromDb();
-      console.log(data);
+      this.user = data; 
+      console.log(this.user);
     }
   }
 });

@@ -1,6 +1,7 @@
 import util from 'util';
 import mysql from 'mysql';
-const pool = mysql.createPool({
+import { createPool } from 'mysql';
+const pool = createPool({
   connectionLimit: 10,
   dateStrings: true,
   timezone: 'local',
