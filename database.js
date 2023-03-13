@@ -1,7 +1,7 @@
-import util from 'util';
-import mysql from 'mysql';
-import { createPool } from 'mysql';
-const pool = createPool({
+
+import mysql from 'mysql2/promise';
+
+const pool = mysql.createPool({
   connectionLimit: 10,
   dateStrings: true,
   timezone: 'local',
@@ -11,23 +11,24 @@ const pool = createPool({
   database: 'cocktail_bar',
 });
 
-pool.getConnection((err, connection) => {
-  if (err) {
-    if (err.code === 'PROTOCOL_CONNECTION_LOST') {
-      console.error('Database connection was closed.');
-    }
-    if (err.code === 'ER_CON_COUNT_ERROR') {
-      console.error('Database has too many connections.');
-    }
-    if (err.code === 'ECONNREFUSED') {
-      console.error('Database connection was refused.');
-    }
-  } else {
-    console.log('Connected to database!');
-  }
-  if (connection) connection.release();
-  return;
-});
 
-pool.query = util.promisify(pool.query);
+// pool.getConnection((err, connection) => {
+//   if (err) {
+//     if (err.code === 'PROTOCOL_CONNECTION_LOST') {
+//       console.error('Database connection was closed.');
+//     }
+//     if (err.code === 'ER_CON_COUNT_ERROR') {
+//       console.error('Database has too many connections.');
+//     }
+//     if (err.code === 'ECONNREFUSED') {
+//       console.error('Database connection was refused.');
+//     }
+//   } else {
+//     console.log('Connected to database!');
+//   }
+//   if (connection) connection.release();
+//   return;
+// });
+
+
 export { pool };
