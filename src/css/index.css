@@ -106,3 +106,18 @@ margin: 2rem auto ;
   margin: 1rem auto;
 }
 
+.devider-short {
+  width: 50vw;
+  margin: .5rem;
+  border-top: 1px solid #000;
+}
+
+.thick{
+  border-top: 3px solid hwb(179 0% 41%);
+}
+
+.total-li-item{
+  /* align right side of devider */
+  position: relative;
+  left: 50%;
+}

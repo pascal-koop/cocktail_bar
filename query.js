@@ -12,7 +12,7 @@ async function createOrder(order) {
 
     const getCocktailPrice = 'SELECT cocktail_price FROM cocktails WHERE cocktail_id IN (?)';
     await conn.query(getCocktailPrice, [cocktailIds]);
-    let lineItems = order.map((cocktail, index) => {
+    let lineItems = order.map((cocktail, _index) => {
       const { amount, cocktail_name, cocktail_price } = cocktail;
       return [orderId, amount, cocktail_name, cocktail_price];
     });

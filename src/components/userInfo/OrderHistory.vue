@@ -1,35 +1,46 @@
 <template>
-  <div>
-    <ul>
-      <li @click="convert" class="ma-2">Date of order</li>
-      <li class="ma-2">{{ orderDate }}</li>
-      <li class="ma-2"> <h3> Cocktail Name</h3> {{ cocktailName }}</li>
-      <li class="ma-2">Amount{{ orderAmount }}</li>
-      <li class="ma-2">Single Price {{ singlePrice }}€</li>
-      <li class="ma-2">Total{{ sumPrice }}</li>
-      <li class="ma-2">{{ orderSum }}</li>
-      <li class="ma-2">{{ orderId }}</li>
-    </ul>
-  </div>
+  <section>
+    <div>
+      <v-list>
+        <v-list-item>
+          <h3 class="ma-2">Order: {{ orderDate }} || Order Id: {{ orderId }}</h3>
+          <v-list-item v-for="item in lineItems">
+            <v-list-item-title class="ma-2">
+              {{ item.cocktail_name }}
+            </v-list-item-title>
+            <v-list-item-title class="ma-2"> Amount: </v-list-item-title>
+            <v-list-items-subtitle class="ma-2">
+              <span class="count">{{ item.order_amount }}</span>
+            </v-list-items-subtitle>
+            <v-list-item-title class="ma-2"> Price: </v-list-item-title>
+            <v-list-items-subtitle class="ma-2">
+              <span class="count">{{ item.single_price }}</span> €
+            </v-list-items-subtitle>
+          </v-list-item>
+          <v-list-item-title class="ma-2 total-li-item"> Total: </v-list-item-title>
+          <v-list-items-subtitle class="ma-2 total-li-item">
+            <span class="count"> {{ orderSum }}</span> €
+          </v-list-items-subtitle>
+          <hr class="devider-short" />
+        </v-list-item>
+        <hr class="devider-long thick" />
+      </v-list>
+    </div>
+  </section>
 </template>
 
 <script setup>
-import { onMounted, ref } from 'vue';
 import { useUserStore } from '../../stores/UserStore';
 const userStore = useUserStore();
 const props = defineProps([
   'orderSum',
   'singlePrice',
-  'sumPrice',
   'cocktailName',
   'orderDate',
   'orderId',
   'orderAmount',
+  'lineItems',
 ]);
-let dateOfOrder = ref(props.orderDate);
-const convert = () => {
-  console.log(typeof dateOfOrder.value);
-};
 </script>
 
 <style lang="scss" scoped></style>

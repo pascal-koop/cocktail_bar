@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-list lines="one">
-      <v-list-item >
+      <v-list-item>
         <v-list-item-content>
           <v-list-item-title class="ma-2">Name:</v-list-item-title>
           <v-list-item-subtitle class="ma-2">{{ firstName }}</v-list-item-subtitle>
@@ -18,6 +18,7 @@
 </template>
 
 <script setup>
+
 const props = defineProps(["firstName", "lastName", "phone", "email"])
 
 
