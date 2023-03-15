@@ -18,10 +18,7 @@
 </template>
 
 <script setup>
-
 const props = defineProps(["firstName", "lastName", "phone", "email"])
-
-
 </script>
 
 <style scoped></style>

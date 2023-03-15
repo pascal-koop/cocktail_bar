@@ -38,7 +38,6 @@ const form = ref(false);
 const email = ref(null);
 const firstName = ref(null);
 
-
 const onSubmit = () => {
   if (!form.value) return
   alert("hi")

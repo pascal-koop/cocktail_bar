@@ -8,7 +8,7 @@ import { pool } from './database.js';
 const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-// verhindert den zugriff von URls die keinen zugriff auf den Server haben sollten
+// verhindert den zugriff von URls, die keinen zugriff auf den Server haben sollten
 app.use(
   cors({
     origin: ['http://localhost:5173'],

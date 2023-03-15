@@ -1,6 +1,5 @@
 <template>
   <h1 class="text-h1">Hey {{ userStore.userName }}</h1>
- 
   <v-card>
     <v-tabs bg-color="cyan-lighten-5" v-model="tab">
       <v-tab value="user">Info</v-tab>
@@ -38,7 +37,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted, computed } from 'vue';
+import { ref, onMounted} from 'vue';
 import UserInformation from '../components/userInfo/UserInformation.vue';
 import OrderHistory from '../components/userInfo/OrderHistory.vue';
 import { useUserStore } from '../stores/UserStore';

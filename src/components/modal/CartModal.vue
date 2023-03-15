@@ -69,11 +69,6 @@ onMounted(() => {
   emit('update:total-items-count', totalItemsCount);
 });
 
-function checkOut() {
-  //dialog.value = false;
-  //cartStore.setUserWasAboutToCheckOut()
-}
-
 const totalPriceSum = computed(() => {
   let totalPrice = 0;
   for (const cartItem of cartStore.cartItem) {

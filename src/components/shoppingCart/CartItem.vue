@@ -2,7 +2,6 @@
   <v-card elevation="8" width="200" class="ma-5">
     <v-img lazy-src :src="imageUrl"><svg-icon class="close-icon" type="mdi" :path="close" @click="deleteItem"></svg-icon></v-img>
     <v-card-item>
-      
       <v-card-title>
         {{ cocktailName }}
       </v-card-title>
@@ -15,7 +14,6 @@
         </v-btn>
         <v-btn @click="incrementItemAmount">
           <svg-icon type="mdi" :path="plus"></svg-icon>
-
         </v-btn>
       </v-card-actions>
     </v-card-item>
@@ -40,8 +38,6 @@ function decrementItemAmount() {
 function deleteItem() {
   emit('delete-item', props.id);
 }
-
-
 </script>
 
 <style scoped>
@@ -53,5 +49,4 @@ function deleteItem() {
  filter: invert(1);
   
 }
-
 </style>

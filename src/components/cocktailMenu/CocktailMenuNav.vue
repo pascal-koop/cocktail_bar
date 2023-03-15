@@ -23,7 +23,6 @@
 import { useCocktailStore } from '../../stores/cocktailStore';
 const cocktailStore = useCocktailStore();
 
-//const emits = defineEmits(['selected-category'])
 </script>
 
 <style lang="scss" scoped></style>

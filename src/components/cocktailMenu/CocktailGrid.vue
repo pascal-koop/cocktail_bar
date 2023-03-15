@@ -14,12 +14,12 @@
 import { onBeforeMount} from 'vue';
 import { useCocktailStore } from '../../stores/cocktailStore';
 import CocktailCards from './CocktailCards.vue';
-import { useCartStore } from '../../stores/CartStore';
+
 onBeforeMount(() => {
   cocktailStore.fetchCocktails();
 });
 const cocktailStore = useCocktailStore();
-const cartStore = useCartStore();
+
 
 function addCocktailToCart(cocktailId) {
   const identifiedCocktail = cocktailStore.cocktailsMenu.find(

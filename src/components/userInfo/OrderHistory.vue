@@ -30,8 +30,6 @@
 </template>
 
 <script setup>
-import { useUserStore } from '../../stores/UserStore';
-const userStore = useUserStore();
 const props = defineProps([
   'orderSum',
   'singlePrice',

@@ -1,7 +1,6 @@
 <template>
   <v-container class="h-25">
     <v-responsive class="d-flex align-center text-center h-25">
-      
       <v-row class="d-flex align-center justify-center mt-">
         <v-col cols="auto">
           <v-switch

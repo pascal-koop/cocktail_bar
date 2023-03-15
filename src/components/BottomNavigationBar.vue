@@ -4,12 +4,10 @@
       <svg-icon type="mdi" :path="home"></svg-icon>
       <span>HOME</span>
     </v-btn>
-
     <v-btn to="/cocktails" value="favorites">
       <svg-icon type="mdi" :path="cocktail"></svg-icon>
       <span>COCKTAILS</span>
     </v-btn>
-
     <v-btn value="cart">
       <v-badge
         color="#d1324a"
@@ -20,11 +18,9 @@
       >
         <svg-icon type="mdi" :path="basket"></svg-icon>
       </v-badge>
-
       <CartModal />
       <span>CART</span>
     </v-btn>
-
     <v-btn to="/login" value="user" @click="isUserOnline">
       <svg-icon type="mdi" :path="user"></svg-icon>
       <span>USER</span>
@@ -51,6 +47,4 @@ function isUserOnline() {
   }
 
 }
-
-
 </script>

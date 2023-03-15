@@ -60,8 +60,6 @@
 import { ref } from 'vue';
 import SvgIcon from '@jamescoyle/vue-icon';
 import { mdiClose } from '@mdi/js';
-import { useCocktailStore } from '../../stores/cocktailStore';
-const cocktailStore = useCocktailStore();
 
 const props = defineProps([
   'id',

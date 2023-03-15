@@ -58,9 +58,6 @@ const firstName = ref(null);
 const lastName = ref(null);
 const phone = ref(null);
 
-
-
-//
 const submitForm = async () => {
   if (!form.value) return;
   // submit form 

@@ -32,8 +32,7 @@ import { useCocktailStore } from '../../stores/cocktailStore';
 const cocktailStore = useCocktailStore();
 const emit = defineEmits(['add-cocktail-to-cart']);
 const props = defineProps(['cocktail']);
-//let image = '../../../public/vite.svg';
-//? logik in den Store verlagern?  weil doppelt hier und in cocktailGrid.vue
+
 function addToCart(cocktailId) {
   const identifiedCocktail = cocktailStore.cocktailsMenu.find(
     cocktail => cocktail.cocktai_id === cocktailId
