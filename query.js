@@ -28,12 +28,12 @@ async function createOrder(order) {
     await conn.query(selectSumPrice, [orderId]);
     await conn.query(updateSumPrice, [orderId, orderId]);
 
-    await conn.commit();
+    await conn.commit(); //festgeschrieben in der Datenbank
   } catch (err) {
-    await conn.rollback();
+    await conn.rollback(); // rückgängig gemacht
     throw err;
   } finally {
-    conn.release();
+    conn.release(); // Verbindung wird wieder freigegeben
   }
 }
 

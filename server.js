@@ -19,7 +19,6 @@ app.get('/cocktails', async (req, res) => {
   try {
     const [data] = await pool.query('SELECT * FROM cocktails');
     res.json(data);
-    console.log('data', data);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
@@ -32,7 +31,6 @@ app.post('/register', (req, res) => {
 
 app.post('/checkout', (req, res) => {
   let order = req.body;
-  //res.json(order);
   createOrder(order);
 });
 
@@ -52,7 +50,6 @@ app.get('/history', async (req, res) => {
     const [orderHistory] = await pool.query(
       'SELECT * FROM orders INNER JOIN line_items ON orders.order_id = line_items.order_id WHERE user_id = 1 ORDER BY orders.order_id DESC'
     );
-    console.log(orderHistory);
     res.json(orderHistory);
   } catch (error) {
     res.status(500).json({ error: error.message });

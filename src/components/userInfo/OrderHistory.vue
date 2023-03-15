@@ -17,7 +17,7 @@
               <span class="count">{{ item.single_price }}</span> €
             </v-list-items-subtitle>
           </v-list-item>
-          <v-list-item-title class="ma-2 total-li-item"> Total: </v-list-item-title>
+          <v-list-item-title class="ma-2 total-li-item"> Total </v-list-item-title>
           <v-list-items-subtitle class="ma-2 total-li-item">
             <span class="count"> {{ orderSum }}</span> €
           </v-list-items-subtitle>

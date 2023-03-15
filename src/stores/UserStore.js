@@ -66,8 +66,6 @@ export const useUserStore = defineStore('userStore', {
 
       // get first name from user object
       this.userName = this.user[0].first_name;
-
-      console.log(this.user);
     },
   },
 });
