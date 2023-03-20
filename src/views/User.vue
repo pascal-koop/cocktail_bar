@@ -37,15 +37,18 @@
 </template>
 
 <script setup>
-import { ref, onMounted} from 'vue';
+import { ref, onBeforeMount, provide} from 'vue';
 import UserInformation from '../components/userInfo/UserInformation.vue';
 import OrderHistory from '../components/userInfo/OrderHistory.vue';
 import { useUserStore } from '../stores/UserStore';
 const userStore = useUserStore();
-onMounted(() => {
-  userStore.fetchUserData();
-  userStore.fetchUserHistory();
-});
+// onBeforeMount(() => {
+//   userStore.fetchUserData();
+//   userStore.fetchUserHistory();
+// });
+
+provide(userStore.fetchUserData(), userStore.fetchUserHistory());
+
 const tab = ref(null);
 </script>
 

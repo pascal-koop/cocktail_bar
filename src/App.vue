@@ -1,7 +1,7 @@
 <template>
   <v-app>
-    <transition name="route" mode="out-in" appear>
-      <router-view> </router-view>
+    <transition name="route">
+      <Router-view></Router-view>
     </transition>
     <BottomNavigationBar />
   </v-app>

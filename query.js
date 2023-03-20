@@ -24,7 +24,7 @@ async function createOrder(order) {
       'SELECT SUM(order_amount * single_price) AS sum_price FROM line_items WHERE order_id = ?';
     const updateSumPrice =
       'UPDATE orders SET order_sum_price = (SELECT SUM(order_amount * single_price) AS sum_price FROM line_items WHERE order_id = ?) WHERE order_id = ?';
-
+      
     await conn.query(selectSumPrice, [orderId]);
     await conn.query(updateSumPrice, [orderId, orderId]);
 
