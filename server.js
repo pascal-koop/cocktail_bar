@@ -48,7 +48,7 @@ app.get('/userinfo', async (req, res) => {
 app.get('/history', async (req, res) => {
   try {
     const [orderHistory] = await pool.query(
-      'SELECT * FROM orders INNER JOIN line_items ON orders.order_id = line_items.order_id WHERE user_id = 1 ORDER BY orders.order_id DESC'
+      'SELECT * FROM orders INNER JOIN line_items ON orders.order_id = line_items.order_id WHERE user_id = 1 ORDER BY orders.order_id DESC, line_items.cocktail_name ASC'
     );
     res.json(orderHistory);
   } catch (error) {

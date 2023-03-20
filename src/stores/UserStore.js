@@ -30,33 +30,27 @@ export const useUserStore = defineStore('userStore', {
           options
         );
       }
-      let newHistory = [{}];
+      let newHistory = [];
+      let currentOrderId = null;
       for (const order of history) {
-        if (order.order_id !== newHistory[newHistory.length - 1].order_id) { // warum - 1? weil die letzte Stelle des Arrays ein leeres Objekt ist, das wir nicht mit in die if Bedingung nehmen wollen
-
+        if (order.order_id !== currentOrderId) {
+          currentOrderId = order.order_id;
           newHistory.push({
             order_id: order.order_id,
             order_date: order.order_date,
             order_sum_price: order.order_sum_price,
             line_items: [],
           });
+        }
+        // push cocktails into line items if order id is identical
 
-          // push cocktails into line items if order id is identical
-          for (const item of history) {
-            if (item.order_id === order.order_id) {
-              newHistory[newHistory.length - 1].line_items.push({
-                single_price: item.single_price,
-                cocktail_name: item.cocktail_name,
-                order_amount: item.order_amount,
-              });
-            }
-          }
-        }
-         // if object is empty remove it
-        if (newHistory[0].order_id === undefined) {
-          newHistory.shift();
-        }
+        newHistory[newHistory.length - 1].line_items.push({
+          single_price: order.single_price,
+          cocktail_name: order.cocktail_name,
+          order_amount: order.order_amount,
+        });
       }
+
       this.history = newHistory;
       return this.history;
     },
@@ -69,10 +63,4 @@ export const useUserStore = defineStore('userStore', {
     },
   },
 });
-/*
-1. iterate over history and store every order with the same order_date in new array of objects
 
-
-
-
-*/
