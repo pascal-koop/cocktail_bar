@@ -37,7 +37,7 @@
 </template>
 
 <script setup>
-import { ref, onBeforeMount, provide} from 'vue';
+import { ref, provide} from 'vue';
 import UserInformation from '../components/userInfo/UserInformation.vue';
 import OrderHistory from '../components/userInfo/OrderHistory.vue';
 import { useUserStore } from '../stores/UserStore';

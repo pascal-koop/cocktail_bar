@@ -22,6 +22,7 @@ const cocktailStore = useCocktailStore();
 
 
 function addCocktailToCart(cocktailId) {
+  debugger
   const identifiedCocktail = cocktailStore.cocktailsMenu.find(
     cocktail => cocktail.cocktail_id === cocktailId
   );

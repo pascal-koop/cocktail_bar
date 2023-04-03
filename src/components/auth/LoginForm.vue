@@ -25,6 +25,7 @@
           <p class="text-center ma-3"
             >You don't have an account? <router-link to="/register">Register</router-link></p
           >
+          <p>{{ firstName }}</p>
         </v-card-item>
       </v-card>
     </v-container>

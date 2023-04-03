@@ -1,4 +1,4 @@
-import { createOrder } from './query.js';
+import { createOrder, registerNewUser } from './query.js';
 import express from 'express';
 // cors is a middleware to enable access shared resources
 // and allows to relax the security applied to an API.
@@ -25,8 +25,10 @@ app.get('/cocktails', async (req, res) => {
 });
 
 app.post('/register', (req, res) => {
-  let user = req.body;
+  let user = req.body
   res.json(user);
+  registerNewUser(user)
+ 
 });
 
 app.post('/checkout', (req, res) => {

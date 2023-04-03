@@ -2,6 +2,7 @@ import { pool } from './database.js';
 
 async function createOrder(order) {
   const conn = await pool.getConnection();
+
   await conn.beginTransaction();
   try {
     const insertUserIntoOrders = 'INSERT INTO orders (user_id) VALUES (1)';
@@ -24,7 +25,7 @@ async function createOrder(order) {
       'SELECT SUM(order_amount * single_price) AS sum_price FROM line_items WHERE order_id = ?';
     const updateSumPrice =
       'UPDATE orders SET order_sum_price = (SELECT SUM(order_amount * single_price) AS sum_price FROM line_items WHERE order_id = ?) WHERE order_id = ?';
-      
+
     await conn.query(selectSumPrice, [orderId]);
     await conn.query(updateSumPrice, [orderId, orderId]);
 
@@ -37,4 +38,26 @@ async function createOrder(order) {
   }
 }
 
-export { createOrder };
+async function registerNewUser(user) {
+  let fName = user.firstName;
+  let lName = user.lastName;
+  let email = user.email;
+  let phone = user.phone;
+  const conn = await pool.getConnection();
+  await conn.beginTransaction();
+  try {
+    let insertNewUser =
+      'INSERT INTO users (first_name, last_name, email, phone) VALUES (?, ?, ?, ?)';
+    await conn.execute(insertNewUser, [fName, lName, email, phone]);
+    await conn.commit();
+   
+  } catch (err) {
+    await conn.rollback();
+    throw err;
+  } finally {
+    conn.release();
+    return true
+  }
+}
+
+export { createOrder, registerNewUser };

@@ -60,15 +60,19 @@ const phone = ref(null);
 
 const submitForm = async () => {
   if (!form.value) return;
-  // submit form 
-  const newUser = {
-    firstName: firstName.value,
-    lastName: lastName.value,
-    email: email.value,
-    phone: phone.value,
-  };
-    postRegisterForm(newUser)
+  // submit form
 
+  try {
+    const newUser = {
+      firstName: firstName.value,
+      lastName: lastName.value,
+      email: email.value,
+      phone: phone.value,
+    };
+    await postRegisterForm(newUser);
+  } catch (error) {
+    console.log(error);
+  }
 };
 const rules = {
   required: value => !!value || 'Field is required!',

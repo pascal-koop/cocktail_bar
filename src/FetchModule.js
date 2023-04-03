@@ -43,7 +43,6 @@ async function postRegisterForm(newUser) {
     throw new Error(message);
   }
   const data = await response.json();
-  console.log(data);
   return data;
 }
 
