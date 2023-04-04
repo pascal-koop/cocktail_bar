@@ -1,4 +1,6 @@
 import { createOrder, registerNewUser } from './query.js';
+import { PrismaClient } from '@prisma/client';
+const prisma = new PrismaClient();
 import express from 'express';
 // cors is a middleware to enable access shared resources
 // and allows to relax the security applied to an API.
@@ -17,22 +19,22 @@ app.use(
 
 app.get('/cocktails', async (req, res) => {
   try {
-    const [data] = await pool.query('SELECT * FROM cocktails');
-    res.json(data);
+    const cocktails = await prisma.cocktails.findMany();
+    res.json(cocktails);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
 });
 
 app.post('/register', (req, res) => {
-  let user = req.body
-  res.json(user);
-  registerNewUser(user)
+  const user = req.body;
  
+  registerNewUser(user, res);
 });
 
 app.post('/checkout', (req, res) => {
   let order = req.body;
+  console.log(order);
   createOrder(order);
 });
 

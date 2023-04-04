@@ -1,0 +1,53 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model cocktails {
+  cocktail_id      Int     @id @default(autoincrement())
+  cocktail_name    String  @db.VarChar(75)
+  cocktail_price   Decimal @db.Decimal(5, 2)
+  ingredients      String  @db.VarChar(255)
+  category         String  @db.VarChar(50)
+  cart_image_url   String  @db.VarChar(200)
+  image_url        String  @db.VarChar(200)
+  cocktail_history String? @db.Text
+}
+
+model line_items {
+  line_item_id  Int      @id @default(autoincrement())
+  order_id      Int
+  order_amount  Int
+  cocktail_name String   @db.VarChar(75)
+  single_price  Decimal  @db.Decimal(5, 2)
+  sum_price     Decimal? @db.Decimal(5, 2)
+  orders        orders   @relation(fields: [order_id], references: [order_id], onUpdate: Restrict, map: "line_items_ibfk_1")
+
+  @@index([order_id], map: "order_id")
+}
+
+model orders {
+  order_id        Int          @id @default(autoincrement())
+  user_id         Int
+  order_date      DateTime?    @default(now()) @db.DateTime(0)
+  order_sum_price Decimal?     @db.Decimal(5, 2)
+  line_items      line_items[]
+  users           users        @relation(fields: [user_id], references: [user_id], onUpdate: Restrict, map: "orders_ibfk_1")
+
+  @@index([user_id], map: "user_id")
+}
+
+model users {
+  user_id            Int      @id @default(autoincrement())
+  first_name         String   @db.VarChar(100)
+  last_name          String   @db.VarChar(100)
+  email              String   @db.VarChar(100)
+  phone              String?  @db.VarChar(50)
+  magic_link         String?  @db.VarChar(255)
+  magic_link_expired Boolean? @default(false)
+  orders             orders[]
+}
