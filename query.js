@@ -9,46 +9,48 @@ async function createOrder(order) {
         user_id: 1,
       },
     });
-    console.log('resultHeader:', resultHeader);
 
     const orderId = resultHeader['order_id'];
-    console.log('orderID', orderId);
     let cocktailIds = order.map(cocktail => cocktail.cocktail_id);
-    console.log('cocktailIDs', cocktailIds);
+    console.log('cocktailIds', cocktailIds);
     //const getCocktailPrice = 'SELECT cocktail_price FROM cocktails WHERE cocktail_id IN (?)';
     const getCocktailPrice = await prisma.cocktails.findMany({
       where: {
         cocktail_id: {
-          in: cocktailIds
-        }
+          in: cocktailIds,
+        },
       },
       select: {
         cocktail_price: true,
       },
     });
-    console.log('cocktailPrice', getCocktailPrice);
-    let lineItems = order.map((cocktail, _index) => {
-      const { amount, cocktail_name, cocktail_price } = cocktail;
-      return [orderId, amount, cocktail_name, cocktail_price];
+    // map over cocktail price and parse it to integer
+    getCocktailPrice.map(cocktail => {
+      cocktail.cocktail_price = parseInt(cocktail.cocktail_price);
     });
-    console.log('lineItems', lineItems);
-    const insertLineItems =
-      'INSERT INTO line_items (order_id, order_amount, cocktail_name, single_price) VALUES ?';
-      console.log('amount', lineItems[1]);
-      // await prisma.line_items.create({
-      //   data: {
-      //     order_amount: lineItems[1],
-      //     cocktail_name
+    console.log('cocktailPrice', getCocktailPrice);
+    let lineItems = [];
+    order.map((cocktail, index) => {
+      lineItems.push({
+        order_id: orderId,
+        order_amount: cocktail.amount,
+        cocktail_name: cocktail.cocktail_name,
+        single_price: getCocktailPrice[index].cocktail_price,
+      }) 
+    });
 
-      //   }
-      // })
+    console.log('lineItems', lineItems);
+
+   await prisma.line_items.create({
+      data: lineItems,
+    });
+
     const selectSumPrice =
       'SELECT SUM(order_amount * single_price) AS sum_price FROM line_items WHERE order_id = ?';
     const updateSumPrice =
       'UPDATE orders SET order_sum_price = (SELECT SUM(order_amount * single_price) AS sum_price FROM line_items WHERE order_id = ?) WHERE order_id = ?';
   } catch (err) {
     throw err;
-  } finally {
   }
 }
 

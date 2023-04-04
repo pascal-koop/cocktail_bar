@@ -34,7 +34,6 @@ app.post('/register', (req, res) => {
 
 app.post('/checkout', (req, res) => {
   let order = req.body;
-  console.log(order);
   createOrder(order);
 });
 
