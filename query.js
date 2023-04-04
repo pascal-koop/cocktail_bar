@@ -36,19 +36,27 @@ async function createOrder(order) {
         order_amount: cocktail.amount,
         cocktail_name: cocktail.cocktail_name,
         single_price: getCocktailPrice[index].cocktail_price,
-      }) 
+      });
     });
 
     console.log('lineItems', lineItems);
 
-   await prisma.line_items.create({
+    await prisma.line_items.createMany({
       data: lineItems,
     });
 
-    const selectSumPrice =
-      'SELECT SUM(order_amount * single_price) AS sum_price FROM line_items WHERE order_id = ?';
-    const updateSumPrice =
-      'UPDATE orders SET order_sum_price = (SELECT SUM(order_amount * single_price) AS sum_price FROM line_items WHERE order_id = ?) WHERE order_id = ?';
+    const selectCalculatedSumPrice =
+      await prisma.$queryRaw`SELECT SUM(order_amount * single_price) AS sum_price FROM line_items WHERE order_id = ${orderId}`;
+
+
+    await prisma.orders.update({
+      where: {
+        order_id: orderId,
+      },
+      data: {
+        order_sum_price: selectCalculatedSumPrice[0].sum_price,
+      },
+    });
   } catch (err) {
     throw err;
   }
