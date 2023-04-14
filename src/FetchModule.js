@@ -3,6 +3,7 @@ const registerUrl = new URL('http://localhost:8000/register');
 const checkoutUrl = new URL('http://localhost:8000/checkout');
 const historyUrl = new URL('http://localhost:8000/history');
 const userUrl = new URL('http://localhost:8000/userinfo');
+const loginUrl = new URL('http://localhost:8000/login');
 
 async function fetchUserDataFromDb() {
   const response = await fetch(userUrl);
@@ -63,28 +64,20 @@ async function postCartToDb(cartItems) {
   return data;
 }
 
-// fetchData().then(data => {
-//   console.log(data);
-// });
-
-/*
-// Promise
-function fetchData() {
-  fetch(url)
-    .then(response => {
-      if (!response.ok) {
-        const message = `An error has occured: ${response.status}`;
-        throw new Error(message);
-      }
-      return response.json();
-    })
-    .then(data => {
-      console.log(data);
-    })
-    .catch(error => {
-      console.log(error);
-    });
+async function loginUser(user) {
+  const response = await fetch(loginUrl, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(user),
+  });
+  if (!response.ok) {
+    const message = `An error has occured: ${response.status}`;
+    throw new Error(message);
+  }
+  const data = await response.json();
+  return data;
 }
-*/
 
-export { fetchCocktailMenu, postRegisterForm, postCartToDb, fetchHistory, fetchUserDataFromDb };
+export { fetchCocktailMenu, postRegisterForm, postCartToDb, fetchHistory, fetchUserDataFromDb, loginUser };

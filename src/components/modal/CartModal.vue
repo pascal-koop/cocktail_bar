@@ -18,7 +18,7 @@
           </div>
         </v-toolbar-title>
         <v-spacer></v-spacer>
-        <v-btn id="checkout-btn" to="" @click="cartStore.postCart">Checkout</v-btn>
+        <v-btn id="checkout-btn" to="/login" @click="closeModal">Checkout</v-btn>
       </v-toolbar>
       <div class="total-wrapper">
         <p>
@@ -90,7 +90,10 @@ const totalItemsCount = computed(() => {
   emit('update:total-items-count', count);
   return count;
 });
-
+function closeModal() {
+  dialog.value = false;
+  
+}
 function incrementAmount(cocktailId) {
   const identifiedCocktail = cartStore.cartItem.find(
     cocktail => cocktail.cocktail_id === cocktailId

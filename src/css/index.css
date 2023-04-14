@@ -121,3 +121,10 @@ margin: 2rem auto ;
   position: relative;
   left: 50%;
 }
+
+#password-visibility {
+position: relative;
+margin-left: 0.4em;
+font-size: 0.8rem;
+}
+

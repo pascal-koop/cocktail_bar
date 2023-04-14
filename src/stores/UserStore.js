@@ -5,11 +5,8 @@ export const useUserStore = defineStore('userStore', {
   state: () => {
     return {
       userName: '',
-      user: [],
       history: [],
-      loggedIn: false,
-      userWasAboutToCheckout: false,
-      isUserOnline: true,
+      user: [],
     };
   },
   actions: {
@@ -61,6 +58,7 @@ export const useUserStore = defineStore('userStore', {
       // get first name from user object
       this.userName = this.user[0].first_name;
     },
+    
   },
+  persistant: true,
 });
-

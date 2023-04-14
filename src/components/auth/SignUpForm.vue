@@ -34,9 +34,32 @@
             variant="underlined"
             label="Email"
           ></v-text-field>
+          <v-text-field
+            v-model="password"
+            :rules="[rules.required, rules.password]"
+            color="#009491"
+            variant="underlined"
+            label="Password"
+            :type="inputType"
+          ></v-text-field>
+          <v-text-field
+            v-model="passwordRepeat"
+            :rules="[rules.required, rules.passwordRepeat]"
+            color="#009491"
+            variant="underlined"
+            label="Password Confirmation"
+            :type="inputType"
+          ></v-text-field>
+
+          
+
           <v-btn class="mt-5 mb-5" :disabled="!form" variant="elevated" type="submit" size="large"
             >Sign Up</v-btn
           >
+          <v-btn id="password-visibility" @click="togglePasswordVisibility"><svg-icon   type="mdi" :path="visibilityIcon"></svg-icon>
+          {{ showPasswordText }} Password
+          </v-btn>
+          
         </v-form>
         <p class="text-center ma-3">
           You have an account?<router-link to="/login"> Login</router-link>
@@ -50,14 +73,30 @@
 <script setup>
 import { postRegisterForm } from '../../FetchModule';
 import { useUserStore } from '../../stores/UserStore';
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
+import SvgIcon from '@jamescoyle/vue-icon';
+import { mdiEyeOutline,mdiEyeOffOutline } from '@mdi/js';
 const userStore = useUserStore();
+
+const eyeOpen = mdiEyeOutline;
+const eyeClose = mdiEyeOffOutline;
+
 const form = ref(false);
 const email = ref(null);
 const firstName = ref(null);
 const lastName = ref(null);
 const phone = ref(null);
+const password = ref(null);
 
+const passwordRepeat = ref(null);
+const passwordVisible = ref(false);
+const showPasswordText = computed(() => (passwordVisible.value ? 'Hide' : 'Show'));
+const visibilityIcon = computed(() => (passwordVisible.value ? eyeOpen : eyeClose));
+const inputType = computed(() => (passwordVisible.value ? 'text' : 'password'));
+const togglePasswordVisibility = () => {
+  passwordVisible.value = !passwordVisible.value;
+
+};
 const submitForm = async () => {
   if (!form.value) return;
   // submit form
@@ -68,10 +107,13 @@ const submitForm = async () => {
       lastName: lastName.value,
       email: email.value,
       phone: phone.value,
+      password: password.value,
+      passwordRepeat: password.value,
     };
+    console.log(newUser);
     await postRegisterForm(newUser);
-  } catch (error) {
-    console.log(error);
+  } catch (err) {
+    throw err;
   }
 };
 const rules = {
@@ -87,6 +129,17 @@ const rules = {
   email: value => {
     const pattern = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
     return pattern.test(value) || 'Please enter a valid Email!';
+  },
+  password: value => {
+    // at least one number, one lowercase and one uppercase letter and at least 8 characters and no spaces in between the characters and at least one special character
+    const pattern = /^(?=.*[!@#$%^&*()\-_=+{}[\]\\|:;"'<>,.?\/])(?=.*[0-9])(?=.*[A-Z])(?=.{8,})/;
+    return (
+      pattern.test(value) ||
+      'Password must contain at least 8 characters, one uppercase letter, one lowercase letter, one number and one special character'
+    );
+  },
+  passwordRepeat: value => {
+    return value === password.value || 'Passwords do not match!';
   },
 };
 </script>

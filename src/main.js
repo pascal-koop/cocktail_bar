@@ -18,11 +18,12 @@ import CartItem from './components/shoppingCart/CartItem.vue';
 
 const app = createApp(App);
 const pinia = createPinia();
+import piniaPluginPersistantState from 'pinia-plugin-persistedstate';
 app.component('cart-item', CartItem);
 // .component('NavigationBar', NavigationBar)
 // .component('Footer', Footer)
 // .component('ShoppingCart', ShoppingCart);
-
+pinia.use(piniaPluginPersistantState);
 app.use(vuetify);
 app.use(pinia);
 app.use(router);

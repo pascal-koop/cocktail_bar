@@ -42,12 +42,20 @@ model orders {
 }
 
 model users {
-  user_id            Int      @id @default(autoincrement())
-  first_name         String   @db.VarChar(100)
-  last_name          String   @db.VarChar(100)
-  email              String   @db.VarChar(100)
-  phone              String?  @db.VarChar(50)
-  magic_link         String?  @db.VarChar(255)
-  magic_link_expired Boolean? @default(false)
-  orders             orders[]
+  user_id    Int      @id @default(autoincrement())
+  first_name String   @db.VarChar(100)
+  last_name  String   @db.VarChar(100)
+  email      String   @unique @db.VarChar(100)
+  phone      String?  @db.VarChar(50)
+  orders     orders[]
+
+  credentials credentials[]
+}
+
+model credentials {
+  user_id  Int    @id
+  password String
+  users    users  @relation(fields: [user_id], references: [user_id], onUpdate: Restrict, map: "credentials_ibfk_1")
+  last_login_date DateTime? @default(now()) @db.DateTime(0)
+  
 }
