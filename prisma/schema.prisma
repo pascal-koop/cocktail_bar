@@ -57,5 +57,7 @@ model credentials {
   password String
   users    users  @relation(fields: [user_id], references: [user_id], onUpdate: Restrict, map: "credentials_ibfk_1")
   last_login_date DateTime? @default(now()) @db.DateTime(0)
+  json_web_token String? @db.VarChar(255)
+
   
 }

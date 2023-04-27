@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia';
 import { useCartStore } from '../stores/CartStore';
 
-import { fetchCocktailMenu } from '../FetchModule';
+import { fetchCocktailMenu } from '../../frontend/FetchModule.js';
 
 export const useCocktailStore = defineStore('cocktailStore', {
   state: () => {

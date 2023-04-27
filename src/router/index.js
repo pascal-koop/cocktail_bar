@@ -7,14 +7,14 @@ import CocktailOrder from '../../src/views/CocktailOrder.vue';
 //import Checkout from '../views/CartCheckout.vue';
 import Home from '../views/Home.vue';
 import User from '../views/User.vue';
-const authStore = JSON.parse(localStorage.getItem('authStore'));
+
+const authStore = localStorage.getItem('authStore');
 // routing
 const routes = [
   {
     path: '/',
     name: 'Home',
     component: Home,
-    
   },
   {
     path: '/cocktails',
@@ -25,14 +25,6 @@ const routes = [
     path: '/login',
     name: 'Login',
     component: LoginForm,
-    beforeEnter: (to, from) => {
-      if (localStorage.getItem('authStore') && authStore.isLoggedIn) {
-        return {
-          path: '/user', 
-          query: { redirect: to.fullPath },
-        }
-      }
-    }
   },
   {
     path: '/register',
@@ -50,24 +42,19 @@ const routes = [
     component: PathNotFound,
   },
 ];
+// Wenn wir beim router in der history createMemoryHistory() angeben wird kein Pfad in der URL angeben -> dafür kann man aber nicht nach vorne und zurück springen.
 const router = createRouter({
   history: createWebHistory(),
   routes,
 });
 
 router.beforeEach(async (to, from) => {
- 
-  if (to.meta.requiresAuth && !localStorage.getItem('authStore')) {
+  if (to.meta.requiresAuth && !authStore) {
     return {
-      path: '/login', 
+      path: '/login',
       query: { redirect: to.fullPath },
-    }
+    };
   }
-  
 });
 
-
-
-
-// Wenn wir beim router in der history createMemoryHistory() angeben wird kein Pfad in der URL angeben -> dafür kann man aber nicht nach vorne und zurück springen.
 export default router;

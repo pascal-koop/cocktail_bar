@@ -29,7 +29,6 @@
         <p class="text-center ma-3">
           You don't have an account? <router-link to="/register">Register</router-link>
         </p>
-        <p>{{ firstName }}</p>
       </v-card-item>
     </v-card>
   </v-container>
@@ -42,7 +41,7 @@ import { useRouter } from 'vue-router';
 
 import SvgIcon from '@jamescoyle/vue-icon';
 import { mdiEyeOutline, mdiEyeOffOutline } from '@mdi/js';
-import { loginUser } from '../../FetchModule';
+import { loginUser } from '../../../frontend/FetchModule.js';
 import { useAuthStore } from '../../stores/AuthStore';
 const eyeOpen = mdiEyeOutline;
 const eyeClose = mdiEyeOffOutline;
@@ -63,31 +62,20 @@ async function onSubmit() {
   if (!form.value) return;
   console.log('submit');
   try {
-    await loginUser({
+    const data = await loginUser({
       email: email.value,
       password: password.value,
     });
-
-    const token = await loginUser({
-      email: email.value,
-      password: password.value,
-    });
-
-    authStore.setToken(token);
+    console.log(data);
     
-    // if (authStore.isLoggedIn) {
-    //   router.push('/user');
-    // }
+    authStore.setToken(data);
 
-    console.log('token', token);
+    router.push('/cocktails');
   } catch (error) {
     throw error;
   }
 }
 
-// if (authStore.isLoggedIn) {
-//   router.push('/user');
-// }
 const rules = {
   required: value => !!value || 'Field is required!',
 

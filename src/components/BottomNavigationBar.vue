@@ -21,30 +21,38 @@
       <CartModal />
       <span>CART</span>
     </v-btn>
-    <v-btn to="/login" value="user" @click="isUserOnline">
+    <v-btn to="/login" value="user">
       <svg-icon type="mdi" :path="user"></svg-icon>
       <span>USER</span>
+    </v-btn>
+
+    <v-btn v-if="authStore.isLoggedIn" to="/" value="logout" @click="userLogout">
+      <svg-icon type="mdi" :path="logout"></svg-icon>
+      <span>LOGOUT</span>
     </v-btn>
   </v-bottom-navigation>
 </template>
 
 <script setup>
+import { onMounted } from 'vue';
+
 import { useCartStore } from '../stores/CartStore';
+import { useRouter } from 'vue-router';
+import { useAuthStore } from '../stores/AuthStore';
 import CartModal from './modal/CartModal.vue';
 import SvgIcon from '@jamescoyle/vue-icon';
-import { mdiHome, mdiGlassCocktail, mdiBasket, mdiAccountSettings } from '@mdi/js';
+import { mdiHome, mdiGlassCocktail, mdiBasket, mdiAccountSettings, mdiLogout } from '@mdi/js';
 const cartStore = useCartStore();
+const router = useRouter();
+const authStore = useAuthStore();
 const basket = mdiBasket;
 const home = mdiHome;
 const cocktail = mdiGlassCocktail;
 const user = mdiAccountSettings;
-
-function isUserOnline() {
-  if (cartStore.isUserOnline) {
-   location.href = '/user';
-  } else {
-    location.href = '/login';
-  }
-
+const logout = mdiLogout;
+  
+function userLogout() {
+  router.push('/');
+  authStore.logout(); 
 }
 </script>

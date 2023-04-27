@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia';
-import { postCartToDb } from '../FetchModule';
+import { postCartToDb } from '../../frontend/FetchModule.js';
 
 export const useCartStore = defineStore('cartStore', {
   state: () => {

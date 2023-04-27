@@ -1,4 +1,5 @@
 import { PrismaClient } from '@prisma/client';
+
 import dotenv from 'dotenv';
 dotenv.config();
 const prisma = new PrismaClient();
@@ -60,7 +61,7 @@ async function createOrder(order) {
   }
 }
 
-async function registerNewUser(user, res, next) {
+async function registerNewUser(user) {
   let first_name = user.firstName;
   let last_name = user.lastName;
   let email = user.email;
@@ -94,7 +95,7 @@ async function registerNewUser(user, res, next) {
         },
       });
       userId = userId.user_id;
-      console.log('userId', userId);
+
       token = jwt.sign({ email: email, userId: userId }, process.env.TOKEN_SECRET, {
         expiresIn: '1h',
       });
@@ -102,47 +103,59 @@ async function registerNewUser(user, res, next) {
       const error = new Error('Signing up failed, please try again later.');
       return next(error);
     }
-    return res.status(200).json({
-      message: 'User created!',
+    return {
       token: token,
       expiresIn: 3600,
       userId: userId,
-    });
+    };
   } catch (err) {
     throw err;
   }
 }
 
-async function userLogin(user, res) {
+async function userLogin(user) {
   try {
     let response =
       await prisma.$queryRaw`SELECT * FROM users INNER JOIN credentials ON users.user_id = credentials.user_id WHERE email = ${user.email}`;
-
+    console.log('query.js:', response);
     let password = response[0]['password'];
     let userId = response[0]['user_id'];
     let email = response[0]['email'];
-
-    crypt.compare(user.password, password, (err, result) => {
-      if (!result) {
-        return res.status(401).send({ message: 'Auth failed' });
-      }
-      updateLastLogin(userId);
-      const token = jwt.sign({ email: email, userId: userId }, process.env.TOKEN_SECRET, {
-        expiresIn: '1h',
-      });
-      console.log(token);
-      return res.status(200).json({
-        message: 'Auth successful',
-        data: {
-          token: token,
-          expiresIn: 3600,
-          userId: userId,
-        },
-      });
+    
+    let result = crypt.compareSync(user.password, password);
+    if (!result) {
+      return {
+        message: 'password or email is incorrect',
+      };
+    }
+    updateLastLogin(userId);
+    const token = jwt.sign({ email: email, userId: userId }, process.env.TOKEN_SECRET, {
+      expiresIn: '1h',
     });
+
+    updateWebToken(userId, token);
+    console.log('token: ', token);
+    return {
+      data: {
+        token: token,
+        expiresIn: 3600,
+        userId: userId,
+      },
+    };
   } catch (err) {
     throw err;
   }
+}
+
+async function updateWebToken(userId, token) {
+  await prisma.credentials.update({
+    where: {
+      user_id: userId,
+    },
+    data: {
+      json_web_token: token,
+    },
+  });
 }
 
 async function updateLastLogin(userId) {
@@ -156,4 +169,23 @@ async function updateLastLogin(userId) {
   });
 }
 
-export { createOrder, registerNewUser, userLogin };
+async function getCurrentUser(userId) {
+  try {
+    let response = await prisma.users.findUnique({
+      where: {
+        user_id: userId,
+      },
+      select: {
+        first_name: true,
+        last_name: true,
+        email: true,
+        phone: true,
+      },
+    });
+    return response;
+  } catch (err) {
+    throw err;
+  }
+}
+
+export { createOrder, registerNewUser, userLogin, getCurrentUser };

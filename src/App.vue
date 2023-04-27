@@ -8,8 +8,11 @@
 </template>
 
 <script setup>
+
 //import DarkLightMode from './components/LightDarkSwitcher.vue';
 import BottomNavigationBar from './components/BottomNavigationBar.vue';
+
+
 </script>
 
 <style>

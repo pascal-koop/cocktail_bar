@@ -1,12 +1,13 @@
 import { defineStore } from 'pinia';
-import { fetchHistory, fetchUserDataFromDb } from '../FetchModule';
-
+import { fetchHistory, fetchUserDataFromDb } from '../../frontend/FetchModule.js';
+import { useAuthStore } from './AuthStore.js';
 export const useUserStore = defineStore('userStore', {
   state: () => {
     return {
       userName: '',
       history: [],
       user: [],
+      isLoggedIn: false,
     };
   },
   actions: {
@@ -52,13 +53,14 @@ export const useUserStore = defineStore('userStore', {
       return this.history;
     },
     async fetchUserData() {
-      const data = await fetchUserDataFromDb();
+      const authStore = useAuthStore();
+      const token = authStore.token;
+      console.log('user Store:',token);
+      const data = await fetchUserDataFromDb(token);
       this.user = data;
 
       // get first name from user object
       this.userName = this.user[0].first_name;
     },
-    
   },
-  persistant: true,
 });

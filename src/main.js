@@ -4,6 +4,7 @@ import './css/index.css';
 import router from './router';
 import App from './App.vue';
 
+
 // Vuetify
 import 'vuetify/styles';
 import { createVuetify } from 'vuetify';

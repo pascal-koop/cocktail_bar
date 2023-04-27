@@ -1,13 +1,10 @@
-import { createOrder, registerNewUser, userLogin } from './query.js';
+import { createOrder, registerNewUser, userLogin } from './backend/query.js';
 import { PrismaClient } from '@prisma/client';
-import { generateAccessToken, isLoggedIn } from './middleWare/users.js';
+import { authorizeUser } from './backend/middleWare/users.js';
 const prisma = new PrismaClient();
 import express from 'express';
-import jwt from 'jsonwebtoken';
-// import bcrypt from 'bcryptjs';
-// import jwt from 'jsonwebtoken';
-// import uuid from 'uuid';
-import { validateRegister } from './middleWare/users.js';
+
+import { validateRegistrationInput } from './backend/middleWare/users.js';
 // cors is a middleware to enable access shared resources
 // and allows to relax the security applied to an API.
 import cors from 'cors';
@@ -31,53 +28,56 @@ app.get('/cocktails', async (req, res) => {
   }
 });
 
-app.post('/register', validateRegister,  (req, res) => {
+app.post('/register', validateRegistrationInput, (req, res) => {
   const user = req.body;
-  //const token = generateAccessToken(user.email);
-  registerNewUser(user, res);
+  let data = registerNewUser(user);
+  res.status(200).json(data);
 });
 
-app.post('/login', (req, res) => {
+app.post('/login', async (req, res) => {
   const user = req.body;
-  console.log('user', user);
-  userLogin(user, res);
-  
+  console.log(user);
+  try {
+    let data = await userLogin(user);
+    console.log('login server.js:', data);
+    res.status(200).json(data);
+  } catch (err) {
+    throw err;
+  }
 });
 
-app.post('/checkout', (req, res) => {
+app.post('/checkout', authorizeUser, (req, res) => {
   let order = req.body;
+  // TODO Rückgabe erstellen
   createOrder(order);
 });
 
-app.get('/userinfo', async (req, res) => {
+app.get('/userinfo', authorizeUser, async (req, res) => {
   try {
-    const userData = await prisma.$queryRaw`SELECT * FROM users WHERE user_id = 1`;
-    
+    let userData = req.userData;
+    // TODO Überarbeiten
     res.json(userData);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
 });
 
-app.get('/history', async (req, res) => {
+app.get('/history', authorizeUser, async (req, res) => {
   try {
-    const orderHistory = await prisma.$queryRaw`SELECT * FROM orders INNER JOIN line_items ON orders.order_id = line_items.order_id WHERE user_id = 1 ORDER BY orders.order_id DESC, line_items.cocktail_name ASC`;
-    
-    
-    
-    
+    // TODO in query.js einarbeiten
+    const orderHistory =
+      await prisma.$queryRaw`SELECT * FROM orders INNER JOIN line_items ON orders.order_id = line_items.order_id WHERE user_id = 1 ORDER BY orders.order_id DESC, line_items.cocktail_name ASC`;
+
     res.json(orderHistory);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
 });
 
-app.get('/secret-route', isLoggedIn, (req, res) => {
-  console.log(req.user);
-  const logged = isLoggedIn(); 
-  console.log(logged);
-  res.json({ message: 'You are logged in' });
-});
+// app.get('/secret-route', isLoggedIn, (req, res) => {
+//   console.log(req.user);
+//   res.json({ message: 'You are logged in' });
+// });
 
 const { PORT = 8000 } = process.env;
 app.listen(PORT, () => {

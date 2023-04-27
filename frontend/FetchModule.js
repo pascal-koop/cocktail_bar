@@ -5,8 +5,23 @@ const historyUrl = new URL('http://localhost:8000/history');
 const userUrl = new URL('http://localhost:8000/userinfo');
 const loginUrl = new URL('http://localhost:8000/login');
 
-async function fetchUserDataFromDb() {
-  const response = await fetch(userUrl);
+const authenticateUser = (token) =>{
+  
+ return {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: 'Bearer ' + token
+ }
+  };
+}
+
+async function fetchUserDataFromDb(token) {
+  let jwtToken = token.data.token;
+  console.log('fetchUserDataFromDb:', jwtToken);
+  console.log(authenticateUser(jwtToken));
+  const response = await fetch(userUrl, authenticateUser(jwtToken));
+  
   if (!response.ok) {
     const message = `An error has occured: ${response.status}`;
     throw new Error(message);
@@ -68,7 +83,7 @@ async function loginUser(user) {
   const response = await fetch(loginUrl, {
     method: 'POST',
     headers: {
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
     },
     body: JSON.stringify(user),
   });
@@ -76,8 +91,15 @@ async function loginUser(user) {
     const message = `An error has occured: ${response.status}`;
     throw new Error(message);
   }
-  const data = await response.json();
+  const data = response.json();
   return data;
 }
 
-export { fetchCocktailMenu, postRegisterForm, postCartToDb, fetchHistory, fetchUserDataFromDb, loginUser };
+export {
+  fetchCocktailMenu,
+  postRegisterForm,
+  postCartToDb,
+  fetchHistory,
+  fetchUserDataFromDb,
+  loginUser,
+};

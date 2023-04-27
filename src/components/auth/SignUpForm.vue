@@ -71,7 +71,7 @@
 </template>
 
 <script setup>
-import { postRegisterForm } from '../../FetchModule';
+import { postRegisterForm } from '../../../frontend/FetchModule.js';
 import { useUserStore } from '../../stores/UserStore';
 import { ref, computed } from 'vue';
 import SvgIcon from '@jamescoyle/vue-icon';
