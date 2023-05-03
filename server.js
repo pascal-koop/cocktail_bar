@@ -15,14 +15,14 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // verhindert den zugriff von URls, die keinen zugriff auf den Server haben sollten
 app.use(
   cors({
-    origin: ['http://localhost:5173'],
+    origin: ['http://localhost:5174'],
   })
 );
 
 app.get('/cocktails', async (req, res) => {
   try {
     const cocktails = await prisma.cocktails.findMany();
-    res.json(cocktails);
+    console.log('cocktails: in Server.js',cocktails);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
@@ -79,7 +79,7 @@ app.get('/history', authorizeUser, async (req, res) => {
 //   res.json({ message: 'You are logged in' });
 // });
 
-const { PORT = 8000 } = process.env;
+const { PORT = 7000 } = process.env;
 app.listen(PORT, () => {
   console.log(`  App running in port ${PORT}`);
   console.log();

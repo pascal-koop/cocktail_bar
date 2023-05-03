@@ -23,12 +23,12 @@ async function authorizeUser (req, res, next){
       if (!req.headers['authorization']) {
         return res.status(401).send({ message: 'No authorization provided' });
       }
-      token = req.headers['authorization'].split(' ')[1];
-      decodedToken = jwt.verify(token, process.env.TOKEN_SECRET);
-      
-      // ! TODO rewrite the check for the token
-      if (!decodedToken) {
-        return res.status(401).send({ message: 'Not authorized' });
+      token = req.headers['authorization'].split(' ')[1] || 0; 
+      try {
+        decodedToken = jwt.verify(token, process.env.TOKEN_SECRET);
+      }
+      catch (err) {
+        return res.status(401).send({ message: 'Invalid token' });
       }
       const userData = await getCurrentUser(decodedToken.userId);
       req.userData = userData;

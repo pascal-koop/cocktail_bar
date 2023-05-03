@@ -1,27 +1,24 @@
-const cocktailsUrl = new URL('http://localhost:8000/cocktails');
-const registerUrl = new URL('http://localhost:8000/register');
-const checkoutUrl = new URL('http://localhost:8000/checkout');
-const historyUrl = new URL('http://localhost:8000/history');
-const userUrl = new URL('http://localhost:8000/userinfo');
-const loginUrl = new URL('http://localhost:8000/login');
+const cocktailsUrl = new URL('http://localhost:7000/cocktails');
+const registerUrl = new URL('http://localhost:7000/register');
+const checkoutUrl = new URL('http://localhost:7000/checkout');
+const historyUrl = new URL('http://localhost:7000/history');
+const userUrl = new URL('http://localhost:7000/userinfo');
+const loginUrl = new URL('http://localhost:7000/login');
 
-const authenticateUser = (token) =>{
-  
- return {
+const setHeader = token => {
+  return {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
-      Authorization: 'Bearer ' + token
- }
+      Authorization: 'Bearer ' + token,
+    },
   };
-}
+};
 
 async function fetchUserDataFromDb(token) {
   let jwtToken = token.data.token;
-  console.log('fetchUserDataFromDb:', jwtToken);
-  console.log(authenticateUser(jwtToken));
-  const response = await fetch(userUrl, authenticateUser(jwtToken));
-  
+  const response = await fetch(userUrl, setHeader(jwtToken));
+
   if (!response.ok) {
     const message = `An error has occured: ${response.status}`;
     throw new Error(message);
