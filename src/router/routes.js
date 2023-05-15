@@ -7,8 +7,9 @@ import CocktailOrder from '../../src/views/CocktailOrder.vue';
 //import Checkout from '../views/CartCheckout.vue';
 import Home from '../views/Home.vue';
 import User from '../views/User.vue';
+import checkout from '../views/CartCheckout.vue';
 
-const authStore = localStorage.getItem('authStore');
+
 // routing
 const routes = [
   {
@@ -35,7 +36,11 @@ const routes = [
     path: '/user',
     name: 'User',
     component: User,
-    meta: { requiresAuth: true },
+  },
+  {
+    path: '/checkout',
+    name: 'Checkout',
+    component: checkout,
   },
   {
     path: '/:pathMatch(.*)*',
@@ -48,13 +53,6 @@ const router = createRouter({
   routes,
 });
 
-router.beforeEach(async (to, from) => {
-  if (to.meta.requiresAuth && !authStore) {
-    return {
-      path: '/login',
-      query: { redirect: to.fullPath },
-    };
-  }
-});
+
 
 export default router;

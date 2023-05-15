@@ -8,17 +8,17 @@
     transition="slide-x-transition"
   >
     <v-card>
-      <v-toolbar id="tool-bar" dark color="secondary">
+      <v-toolbar id="tool-bar" >
         <v-btn icon dark @click="dialog = false">
-          <svg-icon type="mdi" :path="close"></svg-icon>
+          <svg-icon class="close-btn" type="mdi" :path="close"></svg-icon>
         </v-btn>
         <v-toolbar-title>
-          <div class="cart-header">
+          <div>
             <h3>Cart</h3>
           </div>
         </v-toolbar-title>
         <v-spacer></v-spacer>
-        <v-btn id="checkout-btn" to="/login" @click="closeModal">Checkout</v-btn>
+        <v-btn id="checkout-btn" @click="checkout" >Checkout</v-btn>
       </v-toolbar>
       <div class="total-wrapper">
         <p>
@@ -53,15 +53,16 @@
   </v-dialog>
 </template>
 <script setup>
-import { onMounted, computed } from 'vue';
+import { onMounted, computed, ref } from 'vue';
 import { useCartStore } from '../../stores/CartStore';
-
-import { ref } from 'vue';
+import { useAuthStore } from '../../stores/AuthStore';
 import SvgIcon from '@jamescoyle/vue-icon';
 import { mdiClose } from '@mdi/js';
+import router from '/src/router/routes.js';
 let dialog = ref(false);
 let close = mdiClose;
 const counter = ref(0);
+const authStore = useAuthStore();
 const cartStore = useCartStore();
 const emit = defineEmits(['update:total-items-count']);
 
@@ -69,7 +70,25 @@ onMounted(() => {
   emit('update:total-items-count', totalItemsCount);
 });
 
-const totalPriceSum = computed(() => {
+const checkout = () =>{
+  if (cartStore.cartItem.length > 0) {
+    cartStore.userWasAboutToCheckout = true;
+  }
+  if (authStore.isLoggedIn && cartStore.userWasAboutToCheckout) {
+    router.push('/checkout');
+    closeModal();
+  }
+  else if (authStore.isLoggedIn && cartStore.cartItem.length === 0) {
+    router.push('/cocktails');
+    closeModal();
+  }
+  else {
+    router.push('/login');
+    closeModal();
+  }
+}
+
+ const totalPriceSum = computed(() => {
   let totalPrice = 0;
   for (const cartItem of cartStore.cartItem) {
     totalPrice += cartItem.amount * cartItem.cocktail_price;

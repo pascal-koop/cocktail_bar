@@ -12,7 +12,7 @@ dotenv.config();
 //     wenn invalid dann fehler
 //     wenn valid dann auslesen des Tokens(userId) danach einen query in die users Tabelle (user wird als currentUser im request objekt gespeichert)
 
-async function authorizeUser (req, res, next){
+async function authorizeUser(req, res, next) {
   try {
     let token = null;
     let decodedToken = null;
@@ -23,22 +23,19 @@ async function authorizeUser (req, res, next){
       if (!req.headers['authorization']) {
         return res.status(401).send({ message: 'No authorization provided' });
       }
-      token = req.headers['authorization'].split(' ')[1] || 0; 
-      try {
-        decodedToken = jwt.verify(token, process.env.TOKEN_SECRET);
-      }
-      catch (err) {
-        return res.status(401).send({ message: 'Invalid token' });
-      }
-      const userData = await getCurrentUser(decodedToken.userId);
-      req.userData = userData;
-     next();
+      token = req.headers['authorization'].split(' ')[1] || 0;
+
+      decodedToken = jwt.verify(token, process.env.TOKEN_SECRET);
     }
+
+    let userData = await getCurrentUser(decodedToken.userId);
+    userData.userId = decodedToken.userId;
+    req.userData = userData;
+    next();
   } catch (err) {
-    console.log(err);
     res.status(401).send({ message: 'Not authorized' });
   }
-};
+}
 const validateRegistrationInput = (req, res, next) => {
   // password min 8 chars
   if (!req.body.password || req.body.password.length < 8) {

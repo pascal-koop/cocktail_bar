@@ -12,12 +12,15 @@ body {
   padding: 0;
   box-sizing: border-box;
 }
+.v-btn--size-default{
+  padding: 0 !important; 
+}
 
 #checkout-btn {
   padding: 0.5rem;
   border-radius: 0.2rem;
-  background-color: #ef5350;
-  color: white !important; 
+  background-color: #eeeeee;
+  color: hwb(0 15% 6%) !important; 
   margin-right: 1.5rem;
 }
 
@@ -26,16 +29,38 @@ body {
 }
 
 .v-btn {
- color:hwb(179 0% 41%) !important;
+  color:hwb(179 0% 41%) !important;
 }
 
+.place-order{
+  color:hwb(0 99% 1%) !important;
+  background-color: hwb(179 0% 41%) !important;
+  border-radius: 0.2rem;
+  margin-bottom: 1em;
+  margin-left: 1.2em;
+  padding: 0 1em 0 1em !important;
+}
+.title{
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+.checkout-card-title{
+  font-size: 1.5rem;
+  margin-top: 1rem;
+}
 input-field {
   color:hwb(179 0% 41%) !important;
+}
+
+.close-btn {
+  color: #eeeeee !important;
+  margin-left: 1rem;
 }
 #tool-bar {
   z-index: 999999;
   position: fixed;
   width: -webkit-fill-available;
+  background-color: hwb(179 0% 41%);
 }
 
 .count {

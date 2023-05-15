@@ -110,7 +110,6 @@ const submitForm = async () => {
       password: password.value,
       passwordRepeat: password.value,
     };
-    console.log(newUser);
     await postRegisterForm(newUser);
   } catch (err) {
     throw err;

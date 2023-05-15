@@ -6,13 +6,16 @@ export const useUserStore = defineStore('userStore', {
     return {
       userName: '',
       history: [],
-      user: [],
+      // TODO:  refactor to object
+      user: {},
       isLoggedIn: false,
     };
   },
   actions: {
     async fetchUserHistory() {
-      const history = await fetchHistory();
+      const authStore = useAuthStore();
+      const token = authStore.token;
+      const history = await fetchHistory(token);
       // loop over history with for in loop and replace order_date with a new date object
       const options = {
         weekday: 'long',
@@ -55,12 +58,11 @@ export const useUserStore = defineStore('userStore', {
     async fetchUserData() {
       const authStore = useAuthStore();
       const token = authStore.token;
-      console.log('user Store:',token);
       const data = await fetchUserDataFromDb(token);
       this.user = data;
-
+      
       // get first name from user object
-      this.userName = this.user[0].first_name;
+      this.userName = this.user.first_name;
     },
   },
 });

@@ -26,8 +26,9 @@ async function fetchUserDataFromDb(token) {
   return response.json();
 }
 
-async function fetchHistory() {
-  const response = await fetch(historyUrl);
+async function fetchHistory(token) {
+  let jwtToken = token.data.token;
+  const response = await fetch(historyUrl, setHeader(jwtToken));
   if (!response.ok) {
     const message = `An error has occured: ${response.status}`;
     throw new Error(message);
@@ -60,19 +61,31 @@ async function postRegisterForm(newUser) {
 }
 
 async function postCartToDb(cartItems) {
+  let token;
+  try {
+    token = localStorage.getItem('authStore');
+    if (token === null ) {
+      throw new Error('No token found');
+    }
+  } catch (error) {
+    let message = `An error has occured: ${error.message}`;
+    throw new Error(message);
+  }
+
+  let jwtToken = JSON.parse(token).token;
+
   const response = await fetch(checkoutUrl, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify(cartItems),
+    body: JSON.stringify({ items: cartItems, token: jwtToken }),
   });
   if (!response.ok) {
     const message = `An error has occured: ${response.status}`;
     throw new Error(message);
   }
-  const data = await response.json();
-
+  const data = response.json();
   return data;
 }
 

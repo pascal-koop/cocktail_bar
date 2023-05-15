@@ -21,7 +21,7 @@
       <CartModal />
       <span>CART</span>
     </v-btn>
-    <v-btn to="/login" value="user">
+    <v-btn @click="checkUserLoggedIn" value="user">
       <svg-icon type="mdi" :path="user"></svg-icon>
       <span>USER</span>
     </v-btn>
@@ -54,5 +54,13 @@ const logout = mdiLogout;
 function userLogout() {
   router.push('/');
   authStore.logout(); 
+}
+function checkUserLoggedIn() {
+  if (authStore.isLoggedIn) {
+    router.push('/user');
+  }
+  else {
+    router.push('/login');
+  }
 }
 </script>

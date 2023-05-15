@@ -60,17 +60,17 @@ const togglePasswordVisibility = () => {
 
 async function onSubmit() {
   if (!form.value) return;
-  console.log('submit');
   try {
     const data = await loginUser({
       email: email.value,
       password: password.value,
     });
-    console.log(data);
-    
     authStore.setToken(data);
-
-    router.push('/cocktails');
+    if (authStore.isLoggedIn) {
+      router.push('/checkout');
+    } else {
+      router.push('/cocktails');
+    }
   } catch (error) {
     throw error;
   }

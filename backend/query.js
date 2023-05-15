@@ -5,13 +5,13 @@ dotenv.config();
 const prisma = new PrismaClient();
 import crypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
-import { mdiColorHelper } from '@mdi/js';
-async function createOrder(order) {
+
+async function createOrder(order, userId) {
   try {
     // const insertUserIntoOrders = 'INSERT INTO orders (user_id) VALUES (1)';
     const resultHeader = await prisma.orders.create({
       data: {
-        user_id: 45,
+        user_id: userId,
       },
     });
 
@@ -117,11 +117,11 @@ async function userLogin(user) {
   try {
     let response =
       await prisma.$queryRaw`SELECT * FROM users INNER JOIN credentials ON users.user_id = credentials.user_id WHERE email = ${user.email}`;
-    console.log('query.js:', response);
+
     let password = response[0]['password'];
     let userId = response[0]['user_id'];
     let email = response[0]['email'];
-    
+
     let result = crypt.compareSync(user.password, password);
     if (!result) {
       return {
@@ -130,15 +130,14 @@ async function userLogin(user) {
     }
     updateLastLogin(userId);
     const token = jwt.sign({ email: email, userId: userId }, process.env.TOKEN_SECRET, {
-      expiresIn: '1h',
+      expiresIn: '2weeks',
     });
 
     updateWebToken(userId, token);
-    console.log('token: ', token);
     return {
       data: {
         token: token,
-        expiresIn: 3600,
+        expiresIn: 1.21e6,
         userId: userId,
       },
     };
@@ -188,4 +187,15 @@ async function getCurrentUser(userId) {
   }
 }
 
-export { createOrder, registerNewUser, userLogin, getCurrentUser };
+async function getOrderHistoryFromDb(user) {
+  let userId = user;
+  try {
+    const orderHistory =
+      await prisma.$queryRaw`SELECT * FROM orders INNER JOIN line_items ON orders.order_id = line_items.order_id WHERE user_id = ${userId} ORDER BY orders.order_id DESC, line_items.cocktail_name ASC`;
+    return orderHistory;
+  } catch (error) {
+    throw error;
+  }
+}
+
+export { createOrder, registerNewUser, userLogin, getCurrentUser, getOrderHistoryFromDb };

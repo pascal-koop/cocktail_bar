@@ -11,7 +11,7 @@
 </template>
 
 <script setup>
-import { onBeforeMount} from 'vue';
+import { onBeforeMount } from 'vue';
 import { useCocktailStore } from '../../stores/cocktailStore';
 import CocktailCards from './CocktailCards.vue';
 
@@ -20,12 +20,11 @@ onBeforeMount(() => {
 });
 const cocktailStore = useCocktailStore();
 
-
 function addCocktailToCart(cocktailId) {
   const identifiedCocktail = cocktailStore.cocktailsMenu.find(
     cocktail => cocktail.cocktail_id === cocktailId
   );
-  
+
   cocktailStore.addToCart(identifiedCocktail);
 }
 </script>

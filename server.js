@@ -1,4 +1,4 @@
-import { createOrder, registerNewUser, userLogin } from './backend/query.js';
+import { createOrder, registerNewUser, userLogin, getOrderHistoryFromDb } from './backend/query.js';
 import { PrismaClient } from '@prisma/client';
 import { authorizeUser } from './backend/middleWare/users.js';
 const prisma = new PrismaClient();
@@ -15,14 +15,14 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // verhindert den zugriff von URls, die keinen zugriff auf den Server haben sollten
 app.use(
   cors({
-    origin: ['http://localhost:5174'],
+    origin: ['http://localhost:5173'],
   })
 );
 
 app.get('/cocktails', async (req, res) => {
   try {
     const cocktails = await prisma.cocktails.findMany();
-    console.log('cocktails: in Server.js',cocktails);
+    res.json(cocktails);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
@@ -36,20 +36,23 @@ app.post('/register', validateRegistrationInput, (req, res) => {
 
 app.post('/login', async (req, res) => {
   const user = req.body;
-  console.log(user);
   try {
     let data = await userLogin(user);
-    console.log('login server.js:', data);
+
     res.status(200).json(data);
   } catch (err) {
+    res.status(500).json({ error: err.message });
     throw err;
   }
 });
 
-app.post('/checkout', authorizeUser, (req, res) => {
-  let order = req.body;
+app.post('/checkout', (req, res) => {
+  let order = req.body.items;
+  console.log(order);
+  let userId = req.body.token.data.userId;
+
   // TODO Rückgabe erstellen
-  createOrder(order);
+  createOrder(order, userId);
 });
 
 app.get('/userinfo', authorizeUser, async (req, res) => {
@@ -64,9 +67,8 @@ app.get('/userinfo', authorizeUser, async (req, res) => {
 
 app.get('/history', authorizeUser, async (req, res) => {
   try {
-    // TODO in query.js einarbeiten
-    const orderHistory =
-      await prisma.$queryRaw`SELECT * FROM orders INNER JOIN line_items ON orders.order_id = line_items.order_id WHERE user_id = 1 ORDER BY orders.order_id DESC, line_items.cocktail_name ASC`;
+    let userData = req.userData;
+    const orderHistory = await getOrderHistoryFromDb(userData.userId);
 
     res.json(orderHistory);
   } catch (error) {

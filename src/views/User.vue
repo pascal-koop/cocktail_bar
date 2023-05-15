@@ -9,12 +9,11 @@
       <v-window v-model="tab">
         <v-window-item value="user">
           <UserInformation
-            v-for="information in userStore.user"
-            :key="information.email"
-            :first-name="information.first_name"
-            :last-name="information.last_name"
-            :phone="information.phone"
-            :email="information.email"
+            :key="userStore.user.email"
+            :first-name="userStore.user.first_name"
+            :last-name="userStore.user.last_name"
+            :phone="userStore.user.phone"
+            :email="userStore.user.email"
           >
           </UserInformation>
         </v-window-item>
@@ -37,17 +36,17 @@
 </template>
 
 <script setup>
-import { ref, provide} from 'vue';
+import { ref, onBeforeMount} from 'vue';
 import UserInformation from '../components/userInfo/UserInformation.vue';
 import OrderHistory from '../components/userInfo/OrderHistory.vue';
 import { useUserStore } from '../stores/UserStore';
 const userStore = useUserStore();
-// onBeforeMount(() => {
-//   userStore.fetchUserData();
-//   userStore.fetchUserHistory();
-// });
+onBeforeMount(() => {
+   userStore.fetchUserData();
+   userStore.fetchUserHistory();
+ });
 
-provide(userStore.fetchUserData(), userStore.fetchUserHistory());
+
 
 const tab = ref(null);
 </script>

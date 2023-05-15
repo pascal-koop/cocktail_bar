@@ -30,7 +30,6 @@ export const useCocktailStore = defineStore('cocktailStore', {
     },
     getIngredients() {
       for (const cocktail of this.selectedCocktail) {
-        console.log(cocktail);
         return cocktail.ingredients;
       }
       this.selectedCocktail;
