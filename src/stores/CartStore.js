@@ -24,5 +24,8 @@ export const useCartStore = defineStore('cartStore', {
     postCart() {
       postCartToDb(this.cartItem);
     },
+    clearCart() {
+      this.cartItem = [];
+    }
   },
 });

@@ -5,7 +5,8 @@
         <template v-slot:activator="{ props }">
           <v-btn class="place-order" v-bind="props"> Place Order </v-btn>
         </template>
-        <v-card class="mx-auto">
+        <v-card class="mx-auto
+        ">
           <v-card-title class="text-h5"> You are about to checkout </v-card-title>
           <v-card-text
             >You are about to check out and commit to being there on the date and paying for your order.</v-card-text
@@ -32,5 +33,6 @@ const takeOrder = () => {
   dialog.value = false;
   router.push('/cocktails');
   cartStore.postCart();
+  cartStore.clearCart();
 };
 </script>

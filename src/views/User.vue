@@ -4,6 +4,7 @@
     <v-tabs bg-color="cyan-lighten-5" v-model="tab">
       <v-tab value="user">Info</v-tab>
       <v-tab  value="history">Order History</v-tab>
+      <v-tab  value="config">Config</v-tab>
     </v-tabs>
     <v-card-text class="mb-15">
       <v-window v-model="tab">
@@ -30,6 +31,13 @@
           :line-items="history.line_items"
           ></OrderHistory>
         </v-window-item>
+        <v-window-item  value="config">
+          <h1>Config</h1>
+          <ul>
+          <li><DarkLightMode /></li>
+          </ul>
+          
+        </v-window-item>
       </v-window>
     </v-card-text>
   </v-card>
@@ -39,6 +47,7 @@
 import { ref, onBeforeMount} from 'vue';
 import UserInformation from '../components/userInfo/UserInformation.vue';
 import OrderHistory from '../components/userInfo/OrderHistory.vue';
+import DarkLightMode from '../components/LightDarkSwitcher.vue';
 import { useUserStore } from '../stores/UserStore';
 const userStore = useUserStore();
 onBeforeMount(() => {

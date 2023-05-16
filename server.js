@@ -15,7 +15,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // verhindert den zugriff von URls, die keinen zugriff auf den Server haben sollten
 app.use(
   cors({
-    origin: ['http://localhost:5173'],
+    origin: ['http://localhost:5174'],
   })
 );
 
@@ -87,3 +87,4 @@ app.listen(PORT, () => {
   console.log();
   console.log(`  > Local: \x1b[36mhttp://localhost:\x1b[1m${PORT}/\x1b[0m`);
 });
+

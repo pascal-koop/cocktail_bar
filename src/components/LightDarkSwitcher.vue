@@ -1,7 +1,9 @@
 <template>
-  <v-container class="h-25">
+ 
+  <v-container class="h-25"> 
     <v-responsive class="d-flex align-center text-center h-25">
-      <v-row class="d-flex align-center justify-center mt-">
+    <h4>Switch to  {{darkMode ? 'Light' : 'Dark'}} Mode</h4>
+      <v-row class="d-flex align-center justify-center">
         <v-col cols="auto">
           <v-switch
             inset
@@ -17,15 +19,15 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 import { useTheme } from 'vuetify';
 
 const theme = useTheme();
 const darkMode = ref(false);
-
 const toggleTheme = () => {
+
   theme.global.name.value = darkMode.value ? 'dark' : 'light';
- 
+  
   // Optional: Get value of current theme
   console.log(`Current theme is dark? ${theme.global.current.value.dark}`);
 };

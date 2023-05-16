@@ -4,7 +4,6 @@ import './css/index.css';
 import router from './router/routes';
 import App from './App.vue';
 
-
 // Vuetify
 import 'vuetify/styles';
 import { createVuetify } from 'vuetify';
@@ -30,4 +29,5 @@ app.use(pinia);
 app.use(router);
 
 app.mount('#app');
+
 

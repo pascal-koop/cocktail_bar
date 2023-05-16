@@ -39,12 +39,15 @@
         <!-- <v-btn class="place-order" @click="cartStore.postCart">Place Order</v-btn> -->
       </v-card-actions>
     </v-card>
+    
   </v-container>
+  
 </template>
 
 <script setup>
 import { useCartStore } from '../../stores/CartStore';
 import confirmationModal from '../modal/confirmationModal.vue';
+import reservation from '../reservation/reservation.vue';
 const cartStore = useCartStore();
 </script>
 
