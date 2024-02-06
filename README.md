@@ -6,6 +6,7 @@
   - sign in / login / logout 
   - watch the user information
   - watch the order history
+  - place orders
 
 ## specs 
   - prisma ORM with MYSQL
