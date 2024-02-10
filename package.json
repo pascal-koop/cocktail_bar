@@ -39,6 +39,6 @@
     "@nuxtjs/device": "^3.0.0",
     "@vitejs/plugin-vue": "^4.0.0",
     "prisma": "^4.12.0",
-    "vite": "^4.0.0"
+    "vite": "^4.5.2"
   }
 }
